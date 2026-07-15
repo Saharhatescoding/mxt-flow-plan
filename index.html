@@ -5,84 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MXT — Email &amp; SMS Revamp · Email Donut</title>
 <style>
-  :root{
-    --ink:#1b1e1c; --soft:#5b625e; --paper:#faf9f6; --card:#ffffff;
-    --accent:#c2314b; --brand:#fb5c6d; --accent-soft:#fdeef0; --line:#e3e1da;
-    --warn:#8a4b12; --warn-soft:#f7ede1; --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--paper);color:var(--ink);font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-  .page{max-width:920px;margin:0 auto;padding:56px 40px 96px}
-  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:600;letter-spacing:-.01em}
-  h1{font-size:40px;line-height:1.15;margin:10px 0 14px}
-  h2{font-size:26px;margin:0 0 6px}
-  h3{font-size:19px;margin:0 0 4px}
-  p{margin:0 0 14px}
-  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
-  .meta{color:var(--soft);font-size:14px;margin-bottom:8px}
-  .rule{border:none;border-top:1px solid var(--line);margin:44px 0}
-  .section-no{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 10px;margin-bottom:10px}
-  .sub{color:var(--soft);font-size:15px;margin-bottom:18px}
-
-  .pull{border-left:3px solid var(--brand);background:var(--accent-soft);padding:16px 20px;border-radius:0 10px 10px 0;margin:18px 0;font-family:Georgia,serif;font-size:18px;line-height:1.5}
-  .pull small{display:block;font-family:-apple-system,sans-serif;font-size:12.5px;color:var(--soft);margin-top:6px}
-
-  table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:14px}
-  th{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
-  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-  .num{font-family:var(--mono);font-size:13px;white-space:nowrap}
-
-  .tag{display:inline-block;font-family:var(--mono);font-size:11px;background:#fdf0f2;border:1px solid #f3d3d9;color:#8e2a3c;border-radius:6px;padding:1px 6px;margin:2px 3px 2px 0;white-space:nowrap}
-  .q{font-family:Georgia,serif;font-style:italic;color:#2a2e2b}
-
-  .prio{counter-reset:p;list-style:none;margin:18px 0}
-  .prio li{counter-increment:p;position:relative;padding:14px 18px 14px 58px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
-  .prio li::before{content:counter(p);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:999px;background:var(--ink);color:#fff;font-family:Georgia,serif;font-size:15px;display:flex;align-items:center;justify-content:center}
-  .prio b{display:block;margin-bottom:2px}
-  .prio span{font-size:14px;color:var(--soft)}
-
-  .callout{background:var(--warn-soft);border:1px solid #e8d3ba;border-radius:10px;padding:14px 18px;margin:14px 0;font-size:14.5px}
-  .callout b{color:var(--warn)}
-
-  .arch{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.9;margin:14px 0;overflow-x:auto;white-space:pre}
-
-  .flow-goal{background:var(--ink);color:#fff;border-radius:10px;padding:12px 18px;font-size:14.5px;margin:10px 0 16px}
-  .flow-goal b{color:#fcff88}
-
-  /* email blueprints */
-  .bp-row{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin:18px 0 28px}
-  .bp{flex:1 1 360px;max-width:420px;background:#fff;border:1px solid #d9d6cd;border-radius:14px;box-shadow:0 8px 28px rgba(20,25,22,.08);overflow:hidden}
-  .bp-head{background:#eefafd;border-bottom:1px solid var(--line);padding:12px 18px;font-size:12.5px;color:var(--soft)}
-  .bp-head .subj{font-size:14.5px;font-weight:700;color:var(--ink);margin:3px 0 1px}
-  .bp-body{padding:20px 20px 24px}
-  .anno{display:block;font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.04em;margin:14px 0 3px}
-  .anno:first-child{margin-top:0}
-  .bp-quote{font-family:Georgia,serif;font-style:italic;font-size:16.5px;line-height:1.45;border-left:3px solid var(--brand);padding-left:12px;margin:2px 0 4px}
-  .bp p{font-size:13.5px;line-height:1.55;margin:2px 0 4px}
-  .bp-chips{margin:2px 0 4px;font-size:13px;font-weight:700;color:var(--accent)}
-  .bp-prod{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:6px 0;font-size:13px}
-  .bp-prod b{display:block;font-size:13.5px}
-  .bp-prod span{color:var(--soft);font-size:12.5px;line-height:1.4;display:block}
-  .bp-cta{display:block;text-align:center;background:var(--ink);color:#fff;border-radius:10px;padding:12px;font-size:13.5px;font-weight:700;letter-spacing:.03em;margin:14px 0 2px}
-  .bp-label{font-family:var(--mono);font-size:11px;color:#fff;background:var(--accent);display:inline-block;border-radius:6px 6px 0 0;padding:3px 12px;margin-left:14px}
-  .bp-wrap{flex:1 1 360px;max-width:420px}
-  .bp-wrap .bp{max-width:none}
-  ul{margin:0 0 14px 20px}
-  li{margin-bottom:7px}
-  .charts{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0}
-  .chart{flex:1 1 380px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-  .chart h4{font-family:Georgia,serif;font-size:16px;margin:0}
-  .chart h4 span{display:block;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11.5px;color:var(--soft);font-weight:400;margin:2px 0 10px}
+  :root{ --ink:#15171c; --mut:#737880; --faint:#a0a5ac; --line:#e7e6e2; --grid:#efeee9; --bg:#eceae6; --card:#fff;
+    --sal:#fb5c6d; --saltint:#ffe9ec; --saldeep:#c0263b; --pos:#1f9d63; --postint:#e4f4ec; --amber:#bb8a1e; --blue:#3a7bd5;
+    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:16px/1.65 "Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:48px 16px}
+  .page{max-width:860px;margin:0 auto;background:var(--card);border-radius:8px;padding:68px 70px 84px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  h1{font-size:30px;line-height:1.2;letter-spacing:-.01em;font-weight:800;margin:14px 0 0}
+  h2{font-size:21px;line-height:1.3;font-weight:800;margin:10px 0 6px;letter-spacing:-.01em}
+  h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800;margin:30px 0 6px}
+  p{margin:13px 0 0}
+  .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:800}
+  .meta{font-size:13px;color:var(--mut);margin-top:10px}
+  .rule{border:none;border-top:1px solid var(--line);margin:48px 0}
+  .section-no{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sal);font-weight:800;padding-bottom:8px;border-bottom:2px solid var(--ink);margin:0 0 18px}
+  .sub{color:var(--mut);font-size:13.5px;margin:4px 0 16px}
+  .pull{margin:18px 0;padding:13px 17px;background:#faf9f6;border-left:3px solid var(--sal);border-radius:0 6px 6px 0;font-size:15.5px;line-height:1.5;font-weight:600}
+  .pull small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;font-weight:400}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:18px 0 20px}
+  th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:800;text-align:left;padding:8px 9px;border-bottom:2px solid var(--ink)}
+  td{text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:baseline}
+  tr:hover td{background:#faf9f6}
+  .num{font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;background:#faf9f6;border:1px solid var(--line);color:var(--mut);border-radius:4px;padding:1px 6px;margin:2px 3px 2px 0;white-space:nowrap}
+  .q{font-style:italic;color:#23262c}
+  .prio{counter-reset:p;list-style:none;margin:18px 0 0}
+  .prio li{counter-increment:p;position:relative;padding:0 0 16px 46px;margin:0 0 4px}
+  .prio li::before{content:counter(p);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .prio li>b{display:block;margin-bottom:2px;font-size:16px}
+  .prio span b{display:inline;font-size:inherit;color:var(--ink)}
+  .prio span{font-size:14px;color:var(--mut);line-height:1.55;display:block}
+  .callout{margin:18px 0;padding:13px 17px;background:#fbf0d8;border-left:3px solid var(--amber);border-radius:0 6px 6px 0;font-size:14px;line-height:1.55}
+  .callout b{color:#8a6610}
+  .arch{background:#faf9f6;border:1px solid var(--line);border-radius:8px;padding:16px 18px;font-family:var(--mono);font-size:12.5px;line-height:1.85;margin:16px 0;overflow-x:auto;white-space:pre;color:#23262c}
+  .flow-goal{margin:12px 0 16px;padding:12px 17px;background:#faf9f6;border-left:3px solid var(--ink);border-radius:0 6px 6px 0;font-size:14px}
+  .flow-goal b{color:var(--saldeep)}
+  .charts{display:flex;gap:16px;flex-wrap:wrap;margin:18px 0}
+  .chart{flex:1 1 320px;max-width:100%;border:1px solid var(--line);border-radius:8px;padding:16px 16px 12px;background:#fff}
+  .chart h4{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:800;margin:0}
+  .chart h4 span{display:block;font-size:11px;color:var(--faint);font-weight:400;text-transform:none;letter-spacing:0;margin:3px 0 10px}
   .chart svg{width:100%;height:auto;display:block}
-  .chart svg text{font-size:11.5px;fill:var(--ink);font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-  .chart svg .val{font-family:var(--mono);font-size:10.5px;fill:var(--soft)}
-  .chart .cap{font-size:12.5px;color:var(--soft);margin:10px 0 0}
-  .foot{color:var(--soft);font-size:13px;border-top:1px solid var(--line);padding-top:18px;margin-top:56px}
-  @media print{
-    .page{padding:20px 8px}
-    .flow-break{page-break-before:always}
-    .bp{break-inside:avoid}
-  }
+  .chart svg text{font-size:11.5px;fill:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif}
+  .chart svg .val{font-size:10.5px;fill:var(--mut);font-variant-numeric:tabular-nums}
+  .chart .cap{font-size:12px;color:var(--faint);margin:10px 0 0}
+  .bp-row{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start;margin:18px 0 28px}
+  .bp{background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:0 1px 3px rgba(0,0,0,.05);overflow:hidden}
+  .bp-head{background:#f4f3ef;border-bottom:1px solid var(--line);padding:12px 16px;font-size:12px;color:var(--mut)}
+  .bp-head .subj{font-size:14px;font-weight:700;color:var(--ink);margin:3px 0 1px}
+  .bp-body{padding:18px 18px 22px}
+  .anno{display:block;font-family:var(--mono);font-size:9.5px;color:var(--saldeep);letter-spacing:.03em;margin:14px 0 3px}
+  .anno:first-child{margin-top:0}
+  .bp-quote{font-style:italic;font-size:15.5px;line-height:1.45;border-left:3px solid var(--sal);padding-left:12px;margin:2px 0 4px;font-weight:600}
+  .bp p{font-size:13px;line-height:1.55;margin:2px 0 4px}
+  .bp-chips{margin:2px 0 4px;font-size:13px;font-weight:800;color:var(--saldeep)}
+  .bp-prod{border:1px solid var(--line);border-radius:8px;padding:9px 11px;margin:6px 0;font-size:12.5px}
+  .bp-prod b{display:block;font-size:13px}
+  .bp-prod span{color:var(--mut);font-size:12px;line-height:1.4;display:block}
+  .bp-cta{display:block;text-align:center;background:var(--ink);color:#fff;border-radius:8px;padding:12px;font-size:12.5px;font-weight:800;letter-spacing:.05em;margin:14px 0 2px;text-transform:uppercase}
+  .bp-label{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:4px 4px 0 0;background:var(--saltint);color:var(--saldeep);margin-left:12px}
+  .bp-wrap{flex:1 1 300px;max-width:360px}
+  ul{margin:12px 0 0;padding-left:0;list-style:none}
+  li{margin:10px 0;padding-left:24px;position:relative}
+  li::before{content:"";position:absolute;left:3px;top:10px;width:7px;height:7px;border-radius:50%;background:var(--ink)}
+  .foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;line-height:1.6;color:var(--mut)}
+  @media print{ body{padding:0;background:#fff} .page{box-shadow:none;padding:20px 8px} .flow-break{page-break-before:always} .bp{break-inside:avoid} }
 </style>
 </head>
 <body>
@@ -134,12 +120,12 @@
   <p class="sub">Live aggregation of every profile in the account (July 15). This is the evidence behind the copy decisions in the flow maps.</p>
 
   <div class="charts">
-    <div class="chart"><h4>Age distribution <span>n = 977 profiles with an age captured</span></h4><svg viewBox="0 0 420 170" role="img" aria-label="Age distribution"><text x="0" y="15">18–24</text><g><title>18–24: 34 · 3.5%</title><rect x="150" y="4" width="24" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="182" y="15">34 · 3.5%</text><text x="0" y="42">25–34</text><g><title>25–34: 139 · 14.2%</title><rect x="150" y="31" width="100" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="258" y="42">139 · 14.2%</text><text x="0" y="69">35–44</text><g><title>35–44: 201 · 20.6%</title><rect x="150" y="58" width="145" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="303" y="69">201 · 20.6%</text><text x="0" y="96">45–54</text><g><title>45–54: 155 · 15.9%</title><rect x="150" y="85" width="112" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="270" y="96">155 · 15.9%</text><text x="0" y="123">55–64</text><g><title>55–64: 236 · 24.2%</title><rect x="150" y="112" width="170" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="328" y="123">236 · 24.2%</text><text x="0" y="150">65+</text><g><title>65+: 212 · 21.7%</title><rect x="150" y="139" width="153" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="311" y="150">212 · 21.7%</text></svg><p class="cap"><b>62% are 45+ · 46% are 55+</b> — the voice defaults to mature skin; the younger acne/oil minority gets its own branch.</p></div>
-    <div class="chart"><h4>Primary + secondary concerns <span>occurrences across 1,146 profiles with recommendations</span></h4><svg viewBox="0 0 420 359" role="img" aria-label="Primary + secondary concerns"><text x="0" y="15">Wrinkles/Fine Lines</text><g><title>Wrinkles/Fine Lines: 621</title><rect x="150" y="4" width="170" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="328" y="15">621</text><text x="0" y="42">Firmness</text><g><title>Firmness: 304</title><rect x="150" y="31" width="83" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="241" y="42">304</text><text x="0" y="69">Eye-Area Aging</text><g><title>Eye-Area Aging: 167</title><rect x="150" y="58" width="46" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="204" y="69">167</text><text x="0" y="96">Uneven Tone/Dark Spots</text><g><title>Uneven Tone/Dark Spots: 166</title><rect x="150" y="85" width="45" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="203" y="96">166</text><text x="0" y="123">Large Pores</text><g><title>Large Pores: 163</title><rect x="150" y="112" width="45" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="203" y="123">163</text><text x="0" y="150">Acne/Breakouts</text><g><title>Acne/Breakouts: 156</title><rect x="150" y="139" width="43" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="201" y="150">156</text><text x="0" y="177">Dryness</text><g><title>Dryness: 142</title><rect x="150" y="166" width="39" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="197" y="177">142</text><text x="0" y="204">Redness</text><g><title>Redness: 139</title><rect x="150" y="193" width="38" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="196" y="204">139</text><text x="0" y="231">Dullness</text><g><title>Dullness: 104</title><rect x="150" y="220" width="28" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="186" y="231">104</text><text x="0" y="258">Rough Texture</text><g><title>Rough Texture: 102</title><rect x="150" y="247" width="28" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="186" y="258">102</text><text x="0" y="285">Oiliness</text><g><title>Oiliness: 79</title><rect x="150" y="274" width="22" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="180" y="285">79</text><text x="0" y="312">Detox</text><g><title>Detox: 43</title><rect x="150" y="301" width="12" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="170" y="312">43</text><text x="0" y="339">Scarring</text><g><title>Scarring: 39</title><rect x="150" y="328" width="11" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="169" y="339">39</text></svg><p class="cap">The aging cluster (wrinkles + firmness + eye-area) = 1,092 mentions — the dominant story by far.</p></div>
+    <div class="chart"><h4>Age distribution <span>n = 977 profiles with an age captured</span></h4><svg viewBox="0 0 420 170" role="img" aria-label="Age distribution"><text x="0" y="15">18–24</text><g><title>18–24: 34 · 3.5%</title><rect x="150" y="4" width="24" height="14" rx="3" fill="#15171c"/></g><text class="val" x="182" y="15">34 · 3.5%</text><text x="0" y="42">25–34</text><g><title>25–34: 139 · 14.2%</title><rect x="150" y="31" width="100" height="14" rx="3" fill="#15171c"/></g><text class="val" x="258" y="42">139 · 14.2%</text><text x="0" y="69">35–44</text><g><title>35–44: 201 · 20.6%</title><rect x="150" y="58" width="145" height="14" rx="3" fill="#15171c"/></g><text class="val" x="303" y="69">201 · 20.6%</text><text x="0" y="96">45–54</text><g><title>45–54: 155 · 15.9%</title><rect x="150" y="85" width="112" height="14" rx="3" fill="#15171c"/></g><text class="val" x="270" y="96">155 · 15.9%</text><text x="0" y="123">55–64</text><g><title>55–64: 236 · 24.2%</title><rect x="150" y="112" width="170" height="14" rx="3" fill="#15171c"/></g><text class="val" x="328" y="123">236 · 24.2%</text><text x="0" y="150">65+</text><g><title>65+: 212 · 21.7%</title><rect x="150" y="139" width="153" height="14" rx="3" fill="#15171c"/></g><text class="val" x="311" y="150">212 · 21.7%</text></svg><p class="cap"><b>62% are 45+ · 46% are 55+</b> — the voice defaults to mature skin; the younger acne/oil minority gets its own branch.</p></div>
+    <div class="chart"><h4>Primary + secondary concerns <span>occurrences across 1,146 profiles with recommendations</span></h4><svg viewBox="0 0 420 359" role="img" aria-label="Primary + secondary concerns"><text x="0" y="15">Wrinkles/Fine Lines</text><g><title>Wrinkles/Fine Lines: 621</title><rect x="150" y="4" width="170" height="14" rx="3" fill="#15171c"/></g><text class="val" x="328" y="15">621</text><text x="0" y="42">Firmness</text><g><title>Firmness: 304</title><rect x="150" y="31" width="83" height="14" rx="3" fill="#15171c"/></g><text class="val" x="241" y="42">304</text><text x="0" y="69">Eye-Area Aging</text><g><title>Eye-Area Aging: 167</title><rect x="150" y="58" width="46" height="14" rx="3" fill="#15171c"/></g><text class="val" x="204" y="69">167</text><text x="0" y="96">Uneven Tone/Dark Spots</text><g><title>Uneven Tone/Dark Spots: 166</title><rect x="150" y="85" width="45" height="14" rx="3" fill="#15171c"/></g><text class="val" x="203" y="96">166</text><text x="0" y="123">Large Pores</text><g><title>Large Pores: 163</title><rect x="150" y="112" width="45" height="14" rx="3" fill="#15171c"/></g><text class="val" x="203" y="123">163</text><text x="0" y="150">Acne/Breakouts</text><g><title>Acne/Breakouts: 156</title><rect x="150" y="139" width="43" height="14" rx="3" fill="#15171c"/></g><text class="val" x="201" y="150">156</text><text x="0" y="177">Dryness</text><g><title>Dryness: 142</title><rect x="150" y="166" width="39" height="14" rx="3" fill="#15171c"/></g><text class="val" x="197" y="177">142</text><text x="0" y="204">Redness</text><g><title>Redness: 139</title><rect x="150" y="193" width="38" height="14" rx="3" fill="#15171c"/></g><text class="val" x="196" y="204">139</text><text x="0" y="231">Dullness</text><g><title>Dullness: 104</title><rect x="150" y="220" width="28" height="14" rx="3" fill="#15171c"/></g><text class="val" x="186" y="231">104</text><text x="0" y="258">Rough Texture</text><g><title>Rough Texture: 102</title><rect x="150" y="247" width="28" height="14" rx="3" fill="#15171c"/></g><text class="val" x="186" y="258">102</text><text x="0" y="285">Oiliness</text><g><title>Oiliness: 79</title><rect x="150" y="274" width="22" height="14" rx="3" fill="#15171c"/></g><text class="val" x="180" y="285">79</text><text x="0" y="312">Detox</text><g><title>Detox: 43</title><rect x="150" y="301" width="12" height="14" rx="3" fill="#15171c"/></g><text class="val" x="170" y="312">43</text><text x="0" y="339">Scarring</text><g><title>Scarring: 39</title><rect x="150" y="328" width="11" height="14" rx="3" fill="#15171c"/></g><text class="val" x="169" y="339">39</text></svg><p class="cap">The aging cluster (wrinkles + firmness + eye-area) = 1,092 mentions — the dominant story by far.</p></div>
   </div>
   <div class="charts">
-    <div class="chart"><h4>Most-recommended products <span>occurrences across all routine positions</span></h4><svg viewBox="0 0 420 224" role="img" aria-label="Most-recommended products"><text x="0" y="15">Gentle Skin Cleanser · Trial</text><g><title>Gentle Skin Cleanser · Trial: 455</title><rect x="190" y="4" width="150" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="348" y="15">455</text><text x="0" y="42">Tri-Retin Cream (S/D) · Trial</text><g><title>Tri-Retin Cream (S/D) · Trial: 432</title><rect x="190" y="31" width="142" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="340" y="42">432</text><text x="0" y="69">Tri-Retin Serum · Trial</text><g><title>Tri-Retin Serum · Trial: 405</title><rect x="190" y="58" width="134" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="332" y="69">405</text><text x="0" y="96">Gentle Skin Cleanser</text><g><title>Gentle Skin Cleanser: 248</title><rect x="190" y="85" width="82" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="280" y="96">248</text><text x="0" y="123">Tri-Retin Cream (S/D)</text><g><title>Tri-Retin Cream (S/D): 243</title><rect x="190" y="112" width="80" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="278" y="123">243</text><text x="0" y="150">Tri-Retin Serum</text><g><title>Tri-Retin Serum: 160</title><rect x="190" y="139" width="53" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="251" y="150">160</text><text x="0" y="177">GA/Charcoal Cleanser</text><g><title>GA/Charcoal Cleanser: 150</title><rect x="190" y="166" width="49" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="247" y="177">150</text><text x="0" y="204">GA/Charcoal · Trial</text><g><title>GA/Charcoal · Trial: 129</title><rect x="190" y="193" width="43" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="241" y="204">129</text></svg><p class="cap">Trial sizes own the top three slots — the engine is built to sample, which is why every CTA pushes the free trial.</p></div>
-    <div class="chart"><h4>Top upsells <span>occurrences across upsell positions</span></h4><svg viewBox="0 0 420 170" role="img" aria-label="Top upsells"><text x="0" y="15">Mineral Sunscreen SPF 33</text><g><title>Mineral Sunscreen SPF 33: 279</title><rect x="190" y="4" width="150" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="348" y="15">279</text><text x="0" y="42">Night Repair Balm</text><g><title>Night Repair Balm: 249</title><rect x="190" y="31" width="134" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="332" y="42">249</text><text x="0" y="69">Vitamin C Brightening Cream</text><g><title>Vitamin C Brightening Cream: 101</title><rect x="190" y="58" width="54" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="252" y="69">101</text><text x="0" y="96">Advanced Moisture Complex</text><g><title>Advanced Moisture Complex: 83</title><rect x="190" y="85" width="45" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="243" y="96">83</text><text x="0" y="123">Tri-Retin Cream (S/D)</text><g><title>Tri-Retin Cream (S/D): 57</title><rect x="190" y="112" width="31" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="229" y="123">57</text><text x="0" y="150">Deep-Hydration Cream</text><g><title>Deep-Hydration Cream: 50</title><rect x="190" y="139" width="27" height="14" rx="3" fill="#fb5c6d"/></g><text class="val" x="225" y="150">50</text></svg><p class="cap">SPF is the #1 upsell — and retinoids cause photosensitivity, so the UV data (A-E3) sells it as dermatology, not a pitch.</p></div>
+    <div class="chart"><h4>Most-recommended products <span>occurrences across all routine positions</span></h4><svg viewBox="0 0 420 224" role="img" aria-label="Most-recommended products"><text x="0" y="15">Gentle Skin Cleanser · Trial</text><g><title>Gentle Skin Cleanser · Trial: 455</title><rect x="190" y="4" width="150" height="14" rx="3" fill="#15171c"/></g><text class="val" x="348" y="15">455</text><text x="0" y="42">Tri-Retin Cream (S/D) · Trial</text><g><title>Tri-Retin Cream (S/D) · Trial: 432</title><rect x="190" y="31" width="142" height="14" rx="3" fill="#15171c"/></g><text class="val" x="340" y="42">432</text><text x="0" y="69">Tri-Retin Serum · Trial</text><g><title>Tri-Retin Serum · Trial: 405</title><rect x="190" y="58" width="134" height="14" rx="3" fill="#15171c"/></g><text class="val" x="332" y="69">405</text><text x="0" y="96">Gentle Skin Cleanser</text><g><title>Gentle Skin Cleanser: 248</title><rect x="190" y="85" width="82" height="14" rx="3" fill="#15171c"/></g><text class="val" x="280" y="96">248</text><text x="0" y="123">Tri-Retin Cream (S/D)</text><g><title>Tri-Retin Cream (S/D): 243</title><rect x="190" y="112" width="80" height="14" rx="3" fill="#15171c"/></g><text class="val" x="278" y="123">243</text><text x="0" y="150">Tri-Retin Serum</text><g><title>Tri-Retin Serum: 160</title><rect x="190" y="139" width="53" height="14" rx="3" fill="#15171c"/></g><text class="val" x="251" y="150">160</text><text x="0" y="177">GA/Charcoal Cleanser</text><g><title>GA/Charcoal Cleanser: 150</title><rect x="190" y="166" width="49" height="14" rx="3" fill="#15171c"/></g><text class="val" x="247" y="177">150</text><text x="0" y="204">GA/Charcoal · Trial</text><g><title>GA/Charcoal · Trial: 129</title><rect x="190" y="193" width="43" height="14" rx="3" fill="#15171c"/></g><text class="val" x="241" y="204">129</text></svg><p class="cap">Trial sizes own the top three slots — the engine is built to sample, which is why every CTA pushes the free trial.</p></div>
+    <div class="chart"><h4>Top upsells <span>occurrences across upsell positions</span></h4><svg viewBox="0 0 420 170" role="img" aria-label="Top upsells"><text x="0" y="15">Mineral Sunscreen SPF 33</text><g><title>Mineral Sunscreen SPF 33: 279</title><rect x="190" y="4" width="150" height="14" rx="3" fill="#15171c"/></g><text class="val" x="348" y="15">279</text><text x="0" y="42">Night Repair Balm</text><g><title>Night Repair Balm: 249</title><rect x="190" y="31" width="134" height="14" rx="3" fill="#15171c"/></g><text class="val" x="332" y="42">249</text><text x="0" y="69">Vitamin C Brightening Cream</text><g><title>Vitamin C Brightening Cream: 101</title><rect x="190" y="58" width="54" height="14" rx="3" fill="#15171c"/></g><text class="val" x="252" y="69">101</text><text x="0" y="96">Advanced Moisture Complex</text><g><title>Advanced Moisture Complex: 83</title><rect x="190" y="85" width="45" height="14" rx="3" fill="#15171c"/></g><text class="val" x="243" y="96">83</text><text x="0" y="123">Tri-Retin Cream (S/D)</text><g><title>Tri-Retin Cream (S/D): 57</title><rect x="190" y="112" width="31" height="14" rx="3" fill="#15171c"/></g><text class="val" x="229" y="123">57</text><text x="0" y="150">Deep-Hydration Cream</text><g><title>Deep-Hydration Cream: 50</title><rect x="190" y="139" width="27" height="14" rx="3" fill="#15171c"/></g><text class="val" x="225" y="150">50</text></svg><p class="cap">SPF is the #1 upsell — and retinoids cause photosensitivity, so the UV data (A-E3) sells it as dermatology, not a pitch.</p></div>
   </div>
 
   <h3 style="margin-top:22px">The facts, in brief</h3>
@@ -214,7 +200,7 @@
   <!-- ============ 4. BLUEPRINTS ============ -->
   <span class="section-no">05</span>
   <h2>Email blueprints — rendered with a real profile</h2>
-  <p class="sub">One sample per flow, laid out as the email will actually read. Values are a real quiz completer's (Kaydence — Williamsburg, KY · combination skin · acne + wrinkles · Clarifying Routine). The small green labels show which property fills each block.</p>
+  <p class="sub">One sample per flow, laid out as the email will actually read. Values are a real quiz completer's (Kaydence — Williamsburg, KY · combination skin · acne + wrinkles · Clarifying Routine). The small red labels show which property fills each block.</p>
 
   <div class="bp-row">
     <div class="bp-wrap">
