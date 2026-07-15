@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MXT — Flow Content Plan · Email Donut</title>
+<title>MXT — Email &amp; SMS Revamp · Email Donut</title>
 <style>
   :root{
     --ink:#1b1e1c; --soft:#5b625e; --paper:#faf9f6; --card:#ffffff;
@@ -90,18 +90,17 @@
 
   <!-- ============ COVER ============ -->
   <div class="kicker">MXT × Email Donut</div>
-  <h1>Flow Content Plan</h1>
-  <p class="meta">Prepared for Jack Davies · July 2026 · Quiz Complete · Quiz Started · Abandoned Checkout</p>
+  <h1>Email &amp; SMS Revamp</h1>
+  <p class="meta">Prepared for Jack Davies · July 2026 · Deliverability · Core Flows · SMS</p>
 
   <!-- ============ 1. PRIORITIES ============ -->
   <span class="section-no">01</span>
   <h2>What has to happen — in order</h2>
   <ol class="prio">
-    <li><b>Fix deliverability.</b><span>Opens are at ~8% and falling. Authentication (SPF / DKIM / DMARC + a dedicated sending domain), engaged-only sending, and plain-text warm-up campaigns to the most-engaged leads. Nothing else in this document lands in an inbox until this is done. Recovery window: 2–4 weeks.</span></li>
-    <li><b>Get the core flow live: Abandoned Checkout.</b><span>The highest-intent audience in the account currently receives nothing. Built new (3 emails + 3 SMS below), suppressed correctly, live before ad spend scales.</span></li>
-    <li><b>Rebuild Quiz Complete with personalized content.</b><span>The flagship flow — every paid lead lands here. The quiz engine writes ~40 finished copy blocks per person; the rebuild wires them in (see the coverage table below).</span></li>
-    <li><b>Launch Quiz Started — Not Completed.</b><span>New flow. Email is captured before the quiz finishes, and some abandoners already carry a primary concern — so the flow branches: concern-captured vs. email-only. The one job is finishing the quiz, which creates the data every other flow spends.</span></li>
-    <li><b>Turn SMS on.</b><span>Numbers and consent are already collected at quiz end; nothing sends today. SMS is the bridge channel while email deliverability recovers (10DLC/TFN registration check first). Every flow below carries an SMS spine.</span></li>
+    <li><b>Fix deliverability.</b><span>Opens are at ~8% and falling — but authentication checks out; this is a reputation problem, concentrated at Gmail (65% of the list, 1.1% opens — the mail lands in spam, not unread). The fix: <b>plain-text campaigns</b> to the most-engaged segment and <b>plain-text / lightweight flow messages</b> until opens recover, then reintroduce design gradually. Recovery window: 2–4 weeks.</span></li>
+    <li><b>Create the missing flows: Abandoned Checkout + Abandoned Browse.</b><span>The two highest-intent audiences in the account currently receive nothing. Abandoned Checkout is mapped below (3 emails + 3 SMS); Abandoned Browse (routine-viewed, never carted) follows the same pattern one intent tier up.</span></li>
+    <li><b>Rebuild the flows: Quiz Complete, then Quiz Started.</b><span>Quiz Complete is the flagship — every paid lead lands here; the rebuild wires in the ~40 pre-written copy blocks per person (coverage table below). Quiz Started — Not Completed is built new with the concern-captured vs. email-only branch.</span></li>
+    <li><b>Fix SMS.</b><span>SMS messages are wired into the flows, but not a single SMS has ever sent — zero SMS activity in the account. Diagnose the break (sending number / 10DLC-TFN registration, consent gating, or message status), fix it, and turn the channel on — it's the bridge while email reputation recovers.</span></li>
   </ol>
   <div class="callout"><b>Offer alignment (found during the audit):</b> the live site sells <b>"Try Your Routine Free — just $6.95 S&amp;H,"</b> converting to the full routine 21 days after arrival — but every existing email and SMS still pushes "$20 trial (save $30) or $50 one-time." The email program is selling an offer that no longer exists. Every message in this plan pushes the real one: <b>free trial pack · 21 days · $6.95 shipping.</b> No subscription-objection copy anywhere; price appears only as a stated fact on CTAs.</div>
 
@@ -362,7 +361,7 @@
   </ul>
 
   <div class="foot">
-    Email Donut · Flow Content Plan for MXT · July 2026 · Sources: full-account profile pull (1,962 profiles incl. full raw quiz-completer profiles), message-by-message census of all 46 live emails + 40 SMS (July 15), live-site offer check, founder call July 10. Property names shown are the live keys in the account; all templates use lookup syntax with defaults.
+    Email Donut · Email &amp; SMS Revamp for MXT · July 2026 · Sources: full-account profile pull (1,962 profiles incl. full raw quiz-completer profiles), message-by-message census of all 46 live emails + 40 SMS (July 15), live-site offer check, founder call July 10. Property names shown are the live keys in the account; all templates use lookup syntax with defaults.
   </div>
 </div>
 </body>
