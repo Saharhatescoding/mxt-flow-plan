@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MXT — Flow Content Plan · Email Donut</title>
+<style>
+  :root{
+    --ink:#1b1e1c; --soft:#5b625e; --paper:#faf9f6; --card:#ffffff;
+    --accent:#0e6b5c; --accent-soft:#e7f1ee; --line:#e3e1da;
+    --warn:#8a4b12; --warn-soft:#f7ede1; --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .page{max-width:880px;margin:0 auto;padding:56px 40px 96px}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:600;letter-spacing:-.01em}
+  h1{font-size:40px;line-height:1.15;margin:10px 0 14px}
+  h2{font-size:26px;margin:0 0 6px}
+  h3{font-size:19px;margin:0 0 4px}
+  p{margin:0 0 14px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .meta{color:var(--soft);font-size:14px;margin-bottom:8px}
+  .lede{font-size:19px;line-height:1.55;color:#2a2e2b;font-family:Georgia,serif}
+  .rule{border:none;border-top:1px solid var(--line);margin:44px 0}
+  .section-no{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 10px;margin-bottom:10px}
+  .sub{color:var(--soft);font-size:15px;margin-bottom:18px}
+
+  .pull{border-left:3px solid var(--accent);background:var(--accent-soft);padding:16px 20px;border-radius:0 10px 10px 0;margin:18px 0;font-family:Georgia,serif;font-size:18px;line-height:1.5}
+  .pull small{display:block;font-family:-apple-system,sans-serif;font-size:12.5px;color:var(--soft);margin-top:6px}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:14.5px}
+  th{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  .num{font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+
+  .tag{display:inline-block;font-family:var(--mono);font-size:11.5px;background:#eef2f0;border:1px solid #d8e0dc;color:#23443c;border-radius:6px;padding:1px 7px;margin:2px 3px 2px 0;white-space:nowrap}
+
+  .stat-row{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 8px}
+  .stat{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat b{display:block;font-family:Georgia,serif;font-size:24px;color:var(--accent)}
+  .stat span{font-size:12.5px;color:var(--soft);line-height:1.35;display:block;margin-top:2px}
+
+  .email{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:20px 22px;margin:0 0 16px}
+  .email .slot{font-family:var(--mono);font-size:11.5px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+  .email h3{margin-bottom:8px}
+  .email .row{margin:7px 0}
+  .email .lbl{display:inline-block;min-width:86px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+  .email .row div{display:inline}
+  .email.sms{border-left-color:#7c5cbf}
+  .email.sms .slot{color:#7c5cbf}
+
+  .flow-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .flow-goal{background:var(--ink);color:#fff;border-radius:10px;padding:12px 18px;font-size:14.5px;margin:10px 0 20px}
+  .flow-goal b{color:#9fd8c9}
+
+  .callout{background:var(--warn-soft);border:1px solid #e8d3ba;border-radius:10px;padding:14px 18px;margin:14px 0;font-size:14.5px}
+  .callout b{color:var(--warn)}
+
+  .arch{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.9;margin:14px 0;overflow-x:auto;white-space:pre}
+
+  .two-col{display:flex;gap:22px;flex-wrap:wrap}
+  .two-col>div{flex:1 1 340px}
+  ul{margin:0 0 14px 20px}
+  li{margin-bottom:7px}
+  .foot{color:var(--soft);font-size:13px;border-top:1px solid var(--line);padding-top:18px;margin-top:56px}
+  @media print{
+    .page{padding:20px 8px}
+    .flow-break{page-break-before:always}
+    .email{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ COVER ============ -->
+  <div class="kicker">MXT × Email Donut</div>
+  <h1>Flow Content Plan</h1>
+  <p class="meta">Prepared for Jack Davies · July 2026 · Covers the three revenue-critical lifecycle flows: Quiz&nbsp;Complete, Quiz&nbsp;Started, Abandoned&nbsp;Checkout</p>
+  <p class="lede">MXT collects 136 data points per person and sells clinically-dosed, personalized routines. The emails should be impossible to mistake for anyone else's — because no one else <em>can</em> write them. This plan defines the voice, the enemy, and every message in the three flows that decide whether a lead becomes a subscriber.</p>
+
+  <div class="stat-row">
+    <div class="stat"><b>136</b><span>data points captured per completed quiz</span></div>
+    <div class="stat"><b>62%</b><span>of quiz-takers are 45+ (46% are 55+)</span></div>
+    <div class="stat"><b>#1</b><span>concern: Wrinkles / Fine Lines — then Firmness, Eye-Area Aging</span></div>
+    <div class="stat"><b>$20</b><span>trial with subscription vs $50 one-time — the only ask these flows make</span></div>
+  </div>
+  <p class="sub" style="margin-top:4px">Audience numbers above are from a live pull of all 1,962 profiles in the account — they shape every copy decision in this plan.</p>
+
+  <hr class="rule">
+
+  <!-- ============ 1. VOICE ============ -->
+  <span class="section-no">01</span>
+  <h2>The voice layer — enemy, proof language, signature elements</h2>
+  <p class="sub">Applied across every email and SMS in every flow below.</p>
+
+  <h3>The enemy: mass-produced skincare</h3>
+  <p>MXT never punches at a named competitor. The enemy is the <em>shelf</em> — products formulated for a statistical average that doesn't exist. Every email gets its tension from this contrast, and the personalization data is the weapon.</p>
+
+  <div class="pull">"Made for everyone. Which means no one. Which means not you."
+    <small>The anti-shelf line — the core enemy frame. Mass products are averaged; an average is a person who doesn't exist.</small></div>
+
+  <div class="pull">"Everything and the lab sink."
+    <small>The kitchen-sink label attack: 40 ingredients at trace doses so the box reads impressive — nothing at a concentration that works. Sets up MXT's counter: a few actives, at effective doses, chosen for you.</small></div>
+
+  <div class="pull">"It's not just what's in your skincare. It's what's missing — and what <em>should</em> be missing."
+    <small>The subtraction principle. Personalization is also exclusion: fragrance out for reactive skin, pore-cloggers out for congestion, redundant actives out so the ones that matter can work. Only possible when you know the person. This is MXT's most defensible copy idea — nobody selling off a shelf can say it.</small></div>
+
+  <h3 style="margin-top:26px">Three signature elements (every email carries at least one)</h3>
+  <table>
+    <tr><th style="width:190px">Element</th><th>How it shows up</th></tr>
+    <tr><td><b>STATS</b></td><td>Every message carries at least one hard number: 136 data points · a 9.5 UV index · 5.0% glycolic · weeks 8–12 · $20. A data-driven brand that writes in adjectives is out of character; numbers are MXT's native tongue.</td></tr>
+    <tr><td><b>CLINICAL FORMULATION</b></td><td>Mechanism-first copy: name the active, the dose, the pathway, the timeline. "Formulated, not merchandised." The tone of a lab that read your file — never influencer-speak.</td></tr>
+    <tr><td><b>CUSTOM CONCENTRATIONS</b></td><td>The profile already stores each person's exact ingredient percentages (<span class="tag">{product_key_ingredient_1_percent}-1</span> → "5.0%"). Printing <em>your</em> doses in <em>your</em> email is the proof no shelf brand can copy — the single most underused asset in the account.</td></tr>
+  </table>
+
+  <h3>The competitive frame</h3>
+  <p>Direct competitors — Prose, Function of Beauty, Geologie — are never named in emails. We name the <em>practice</em> instead:</p>
+  <ul>
+    <li><b>vs mass brands (the open enemy):</b> averaged formulas, kitchen-sink labels, "made for everyone but you."</li>
+    <li><b>vs other quiz brands (the implicit contrast):</b> <em>"Some brands personalize the label. We personalize the formula — and the exclusions."</em> MXT's edges: skincare-specific depth (130+ points vs a 5-question widget), exact per-person concentrations, and environment intelligence (UV / air quality / water hardness from the zip code) that no quiz-to-bestseller funnel touches.</li>
+  </ul>
+
+  <div class="callout"><b>Stats we need from you (they make the copy hit harder):</b> ① how many unique routine permutations the engine can produce (the "we could never stock this on a shelf" number) · ② the formulation exclusion list — what MXT refuses to put in a bottle and why · ③ typical shelf-product concentrations vs MXT doses for the top actives · ④ substantiation for the results timeline (weeks 2/4/8/12).</div>
+
+  <hr class="rule">
+
+  <!-- ============ 2. FINDINGS ============ -->
+  <span class="section-no">02</span>
+  <h2>What we found in the current flows</h2>
+  <p class="sub">Full message-by-message pull of the live flows, July 15. The architecture is directionally right — the execution is what's hurting.</p>
+  <ul>
+    <li><b>Placeholder text is reaching customers.</b> Several live emails and most flow SMS contain literal <span class="tag">{Primary Concern}</span> / <span class="tag">{First Name}</span> as visible text (unwired duplicate content blocks), and the mini-quiz flow opens with literal "ROUTINE/PRODUCT … SKINCONCERN."</li>
+    <li><b>Mismatched science.</b> The ingredient-education email pairs Product 2 with Product 1's ingredient description — the credibility email currently contradicts itself.</li>
+    <li><b>The two most persuasion-critical emails are image-only</b> (social proof; the trial de-risk email) — invisible to anyone with images off, and a spam-filter red flag that feeds the open-rate problem directly.</li>
+    <li><b>Two flows are mailing the same audience.</b> "Trial Non-Conversion Nurture" and "Quiz Complete — No Purchase" both target quiz-completers who didn't buy: up to ~12 emails + 12 SMS in three weeks to a brand-new list. Likely a meaningful contributor to the deliverability slide. (Trigger config to be confirmed in the UI.)</li>
+    <li><b>Manufactured urgency.</b> "Your quiz results will expire and you'll need to retake the quiz" — a claim this audience can test, and one that costs trust the brand's whole premise depends on.</li>
+    <li><b>SMS is built but has never sent</b> (no sending setup) — and several texts are missing opt-out language, deep-link to the homepage instead of the results page, or repeat each other verbatim.</li>
+    <li><b>No active checkout-abandonment coverage.</b> The highest-intent audience in the account currently receives nothing — Flow C below is that build.</li>
+    <li><b>The environment goldmine is untouched.</b> UV index, seasonality, air quality, water hardness — generated for every completed quiz, used in zero emails.</li>
+  </ul>
+
+  <hr class="rule">
+
+  <!-- ============ 3. METHOD ============ -->
+  <span class="section-no">03</span>
+  <h2>The method: one rung at a time</h2>
+  <p>Nobody leaps from "took a quiz" to "$99/month subscriber." Each flow meets the person at the last thing they actually did, and scaffolds exactly <b>one</b> next step — the step just beyond what they'd do on their own (their zone of proximal development):</p>
+  <table>
+    <tr><th>Where they stopped</th><th>The one rung we ask for</th><th>What we never ask for here</th></tr>
+    <tr><td>Started the quiz, didn't finish</td><td><b>Finish the quiz</b> (2 minutes)</td><td>Money — that's two rungs up</td></tr>
+    <tr><td>Finished the quiz, didn't buy</td><td><b>Try it — $20, reversible</b></td><td>The $99/mo commitment</td></tr>
+    <tr><td>Started checkout, didn't pay</td><td><b>Finish the purchase they already chose</b></td><td>Re-persuasion (it plants doubt)</td></tr>
+  </table>
+  <p>The subscription is won <em>later</em> — by the product, the onboarding, and the retinoid-timeline education. These three flows exist to start trials, full stop.</p>
+
+  <div class="arch">TRAFFIC ──▶ Quiz Started ──▶ Quiz Complete ──▶ Checkout Started ──▶ Trial ──▶ Subscription
+              │                │                  │
+              ▼                ▼                  ▼
+         [ FLOW B ]       [ FLOW A ]         [ FLOW C ]
+         finish quiz      start trial        finish checkout
+
+  Priority: C ▸ A ▸ B — each flow EXITS the moment the person
+  levels up (B exits on quiz-complete; A exits on checkout-started;
+  all three exit on Placed Order). One flow per person at a time.</div>
+
+  <hr class="rule flow-break">
+
+  <!-- ============ FLOW A ============ -->
+  <span class="section-no">Flow A</span>
+  <div class="flow-head"><h2>Quiz Complete — No Purchase</h2><span class="meta">6 emails + 3 SMS · ~10 days</span></div>
+  <div class="flow-goal"><b>Goal:</b> start a $20 trial. &nbsp;<b>Audience:</b> completed the full quiz, saw their routine, didn't add to cart — where all paid traffic lands. &nbsp;<b>Arc:</b> validate → explain → prove → de-risk → decide.</div>
+
+  <div class="email sms">
+    <div class="slot">SMS 1 · 20 minutes</div>
+    <h3>"Your results are saved"</h3>
+    <div class="row"><span class="lbl">Message</span><div>"Mxt: Your <span class="tag">{skin_profile}</span> analysis is saved — see your <span class="tag">{routine_name_1}</span>: [results deep-link]. Reply STOP to opt out."</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Anchoring — consolidate the learning they just finished before it fades.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>SMS is the one channel guaranteed to arrive right now, and the results page is the strongest seller the brand owns. No pitch — we're returning something that's theirs.</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 1 · 1 hour</div>
+    <h3>"Your skin, decoded"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Open with their <span class="tag">{skin_profile}</span> sentence <em>verbatim</em>, then their concerns (<span class="tag">{concern_name}-1/-2</span>), then the routine card with <span class="tag">{routine_formula_rationale}</span>. Read-back first, products second. Near-plain-text build.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Validation — confirm the self-knowledge they just earned before asking for anything new.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>At today's open rates only self-referential relevance earns the open, and a mature audience trusts being understood before being sold. Their own words are the one subject line they can't ignore.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>STAT:</b> "We analyzed 136 data points about your skin." <b>Enemy (soft):</b> "This wasn't pulled off a shelf — it couldn't be."</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 2 · Day 2</div>
+    <h3>"Every ingredient has a job — and yours are dosed for you"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Per product: the key active (<span class="tag">{product_key_ingredient_1_name}-N</span>) at its exact concentration (<span class="tag">{product_key_ingredient_1_percent}-N</span>), what it does for <span class="tag">{concern_name}-1</span> — and one line on what was <em>left out</em> and why (sensitivity-aware via <span class="tag">{skin_sensitivity_level}</span>).</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Comprehension — bridge from "this is mine" to "I understand why it would work on me."</div></div>
+    <div class="row"><span class="lbl">Why</span><div>A 45+/55+ buyer with wrinkle and firmness concerns purchases mechanism, not vibes — actives, percentages, pathways. This is also where the current flow's mismatched tags get fixed; the science email must not contradict itself.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>CLINICAL FORMULATION + CUSTOM CONCENTRATIONS</b> centerpiece. <b>Enemy:</b> "Mass-market serums are everything and the lab sink — 40 ingredients, none at a dose that matters. Your routine runs a handful of actives at working concentrations. And just as deliberately, some things are missing."</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 3 · Day 4</div>
+    <h3>"We also checked where you live"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div><span class="tag">{location_city_state}</span> + the AI-written <span class="tag">{uv_index_description}</span> and <span class="tag">{stressor_water_hardness}</span> narrative → why the routine includes <span class="tag">{product_spf_note}-1</span>. "You told us 20 things. Your zip code told us 10 more."</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Relevance expansion — deepen "built for me" with data they didn't consciously give.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>The "how did they know that?" moment — the one personalization a shelf product structurally cannot make, and it sets up the SPF logic (retinoids + high UV) as dermatology rather than a pitch.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>STATS:</b> the actual UV index and air-quality numbers for their zip. <b>Enemy:</b> "A shelf product doesn't know it's a 9.5-UV summer in Pasadena. Yours does."</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 4 · Day 6</div>
+    <h3>Proof from people with their exact concern</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Testimonials filtered to <span class="tag">{concern_name}-1</span> — the named-customer quotes already written for the nurture flow (they're good), rebuilt as real text, with the results-timeline frame (weeks 2/4/8).</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Vicarious mastery — belief through peers one rung ahead of them.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>No founder story, no influencers — concern-matched peer proof is the only social scaffold this brand has, and matching it keeps the personalization promise unbroken. Replaces the current image-only proof email that spam filters can't read.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>STATS:</b> timeline numbers inside the quotes ("noticeable by week 3"). Age-adjacent attribution where possible — peers should look like the list (45+).</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 5 · Day 8 — the decision email</div>
+    <h3>"Two ways to try. Zero ways to get trapped."</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>$20 trial-with-subscription (save $30) vs $50 one-time, side by side, genuinely neutral. What's physically in the box. Cancel-anytime shown as three steps. Sensitivity ramp note via <span class="tag">{skin_sensitivity_level}</span>.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>The guarded step — shrink the leap to a $20 reversible action, escape valve visible.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>The funnel's known leak is offer fear; showing the one-time path makes the subscription feel safe, which is exactly what converts the wary majority to the cheaper subscription trial. Sell the trial. Never the $99.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>CLINICAL:</b> frame the trial as "a patch test for a whole routine." <b>STAT:</b> the $30 delta does the talking.</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 6 · Day 10</div>
+    <h3>Honest last call</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Recap card + <span class="tag">{free_reward}</span> if present. A real deadline if one exists (gift window, price change) — otherwise "your results stay saved" and a graceful exit to long-term nurture. The fake "your formula expires, retake the quiz" line is retired.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Closure — urgency only after every belief rung is built, never as a substitute for one.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>Manufactured expiry reads as a lie the moment someone tests it — and trust is the entire brand premise. An honest close keeps the list mailable for the repriced offer that's coming.</div></div>
+  </div>
+
+  <div class="email sms">
+    <div class="slot">SMS 2 · Day 8 (with Email 5) &nbsp;·&nbsp; SMS 3 · Day 10</div>
+    <h3>Decision + last call mirrors</h3>
+    <div class="row"><span class="lbl">Message</span><div>"$20 trial (save $30) or $50 one-time — your <span class="tag">{concern_name}-1</span> routine, your call: [deep-link]" · then one short last-call. Every SMS carries STOP language and deep-links to <em>their results</em>, never the homepage.</div></div>
+  </div>
+
+  <hr class="rule flow-break">
+
+  <!-- ============ FLOW B ============ -->
+  <span class="section-no">Flow B</span>
+  <div class="flow-head"><h2>Quiz Started — Not Completed</h2><span class="meta">4 emails (+1 conditional SMS) · ~6 days · NEW build</span></div>
+  <div class="flow-goal"><b>Goal:</b> finish the quiz — <b>not</b> buy. Their profile is mostly empty; this flow's job is to <em>create</em> the personalization every other flow spends. &nbsp;<b>Exit:</b> the moment quiz-complete fires (hand off to Flow A).</div>
+
+  <div class="email">
+    <div class="slot">Email 1 · 30–60 minutes</div>
+    <h3>"Your skin analysis is unfinished"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Resume-where-you-left-off link. "About 2 minutes left." Nothing else — no products, no prices.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Task completion — the smallest possible next step, with the path restored (resume, not restart).</div></div>
+    <div class="row"><span class="lbl">Why</span><div>Mid-task abandonment is usually interruption, not rejection, and intent decays by the hour. Mentioning money here would be asking for a rung they can't reach yet.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>STAT:</b> "You're ~60% through. 2 minutes left."</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 2 · Day 1</div>
+    <h3>"Here's what's waiting at the end"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Show the artifact: a sample (anonymized) results page — the skin-profile paragraph, the UV/environment card, a 3-product routine with concentrations. "This is what people who finish walk away with. It's free."</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Motivation — raise the visible reward, since they've already priced the effort.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>People love learning about themselves — the results page is a powerful seller in its own right (your words on the call, and the data agrees). Sell the results page; the results page sells the routine.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>Enemy:</b> "A 5-question quiz that ends in a bestseller isn't an analysis — it's a sales funnel with a costume on. This one runs 130+ data points." <b>CLINICAL:</b> the sample page shows real percentages.</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 3 · Day 3</div>
+    <h3>The easier rung: the 30-second version</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>"Short on time? Take the 30-second version." Mini quiz as the primary CTA, full quiz alongside. No guilt about the abandon.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Difficulty reduction — when a learner stalls on a rung, you lower the rung; you don't repeat the instruction louder.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>The mini-quiz path and its results flow already exist, so this costs nothing — and a mini-quiz completer generates enough data to enter personalized nurture instead of dying in a dead-end segment.</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 4 · Day 6</div>
+    <h3>"What most people your age discover"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>The honest aggregate: "the most common discoveries among people who finish — fine lines they'd started ignoring, sun exposure their zip code explains, a routine mismatch they'd never have guessed." Final resume link, then graceful exit to the general list.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Normative pull — the last lever when task- and reward-scaffolds haven't moved them.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>The aggregate is real (wrinkles and firmness dominate this list), so the curiosity gap is honest — and a clean exit protects the sender reputation instead of shouting at non-responders.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>STATS:</b> the concern distribution, told as story ("2 in 3 people who finish are treating a concern they almost never say out loud").</div></div>
+  </div>
+
+  <div class="email sms">
+    <div class="slot">Conditional SMS · Day 2</div>
+    <h3>Resume nudge — only if a phone exists</h3>
+    <div class="row"><span class="lbl">Message</span><div>"Your Mxt skin analysis is ~60% done — finish in 2 min: [resume link]. Reply STOP to opt out."</div></div>
+    <div class="row"><span class="lbl">Why</span><div>The phone question sits at the <em>end</em> of the quiz, so most abandoners won't have one on file — this step fires for the few who do. Worth confirming where the phone capture sits; moving it earlier is a separate conversation with real trade-offs.</div></div>
+  </div>
+
+  <hr class="rule flow-break">
+
+  <!-- ============ FLOW C ============ -->
+  <span class="section-no">Flow C</span>
+  <div class="flow-head"><h2>Abandoned Checkout</h2><span class="meta">4 emails + 2 SMS · ~4 days · NEW build</span></div>
+  <div class="flow-goal"><b>Goal:</b> complete the purchase they already chose. Highest-intent audience in the account — the barrier is trust and interruption, not comprehension. &nbsp;<b>Rule:</b> no discounts. Pricing is being rebuilt separately, and training a two-week-old list to abandon-for-coupons is permanent damage.</div>
+
+  <div class="email sms">
+    <div class="slot">SMS 1 · 25 minutes</div>
+    <h3>State restore</h3>
+    <div class="row"><span class="lbl">Message</span><div>"Mxt: Your trial kit is still in your cart — <span class="tag">{routine_name_1}</span>, saved and ready: [checkout deep-link]. Reply STOP to opt out."</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Friction removal — resumption, zero re-decision.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>Most checkout abandons are interruptions, especially for this demographic. The fastest recovery is the channel that actually arrives today.</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 1 · 1 hour</div>
+    <h3>"You were 30 seconds from done"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>A receipt of their own decision: the routine card of exactly what's in the cart, the $20 trial price restated, one CTA back to checkout. No new arguments.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Same rung, cleared path — they already climbed to "decided"; don't re-teach, re-open the door.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>Re-persuading someone who already chose introduces doubt where there was none. The email's whole job is to make resumption effortless.</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 2 · Day 1 — the load-bearing email</div>
+    <h3>"First retinoid routine? Here's exactly what to expect"</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Name the two unspoken fears and dismantle both: <b>"will it hurt my skin?"</b> → the week-1 tingle explained, the ramp matched to <span class="tag">{skin_sensitivity_level}</span>, and what was <em>excluded</em> from their formula because of what they told us; <b>"am I trapped?"</b> → cancel-anytime in three shown steps, what happens after the trial, transparent subscription mechanics.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Security scaffold — the block is emotional, not informational, so the scaffold is safety.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>A 55-year-old first-time retinoid buyer at an unknown brand's subscription checkout has <em>rational</em> fears; naming them is what a trusted clinician does. The best barrier-education copy in the current account gets harvested into this send.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>Subtraction principle,</b> deployed at the moment it matters most: "Your formula is also defined by what's <em>not</em> in it — no [fragrance/known trigger], because you told us your skin reacts. That's not a product line. That's your file."</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 3 · Day 2</div>
+    <h3>The two-paths math</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>$20 trial-with-subscription (save $30) vs $50 one-time — side by side, both CTAs live, genuinely neutral: "either way, you try it. One path just costs less because you let us plan ahead."</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Choice architecture — control over the terms is the final rung before commitment for a wary buyer.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>The one-time option is the pressure-release valve by design; showing it honestly makes the subscription feel safe rather than sneaky — which is what actually moves people onto the cheaper subscription path.</div></div>
+    <div class="row"><span class="lbl">Flavor</span><div><b>STATS</b> carry the email: two prices, one delta, zero adjectives.</div></div>
+  </div>
+
+  <div class="email sms">
+    <div class="slot">SMS 2 · Day 2, evening</div>
+    <h3>Short last call</h3>
+    <div class="row"><span class="lbl">Message</span><div>"Still yours: the <span class="tag">{concern_name}-1</span> trial kit, $20. Checkout takes about a minute: [link]. Reply STOP to opt out."</div></div>
+  </div>
+
+  <div class="email">
+    <div class="slot">Email 4 · Day 4</div>
+    <h3>"Your cart expires. Your routine doesn't."</h3>
+    <div class="row"><span class="lbl">Narrative</span><div>Release the pressure without ending the relationship: the cart may clear, the results and formula stay saved. Exit into Flow A's nurture tail.</div></div>
+    <div class="row"><span class="lbl">ZPD</span><div>Closure without regression — a "no" is a "not yet"; keep them on the ladder.</div></div>
+    <div class="row"><span class="lbl">Why</span><div>With repricing weeks away, the worst outcome isn't a lost sale — it's a burned contact. Someone who abandons at $50 today may convert at the new price, but only if these four days felt respectful.</div></div>
+  </div>
+
+  <hr class="rule flow-break">
+
+  <!-- ============ ARCHITECTURE ============ -->
+  <span class="section-no">04</span>
+  <h2>Flow architecture — how the three coexist</h2>
+  <table>
+    <tr><th>Flow</th><th>Trigger</th><th>Suppression / exit (all conditions AND'd)</th></tr>
+    <tr><td><b>C — Checkout</b></td><td>Checkout Started</td><td class="num">Placed Order = 0 since entry</td></tr>
+    <tr><td><b>A — Quiz Complete</b></td><td>Quiz-complete event</td><td class="num">Placed Order = 0 AND Checkout Started = 0 since entry → hands off to C</td></tr>
+    <tr><td><b>B — Quiz Started</b></td><td>Quiz-start event</td><td class="num">Quiz Complete = 0 AND Placed Order = 0 since entry → hands off to A</td></tr>
+  </table>
+  <ul>
+    <li><b>One flow per person at a time.</b> Priority C ▸ A ▸ B; each flow exits the moment the person levels up.</li>
+    <li><b>Consolidate the parallel nurture.</b> The existing second quiz-completer flow either merges its best content into Flow A or is re-scoped to a genuinely different audience — one flow owns each audience.</li>
+    <li><b>Suppress on the downstream goal, never the trigger event; negatives joined by AND</b> — the two silent killers (a flow that empties, a flow that over-sends) both live in these filters.</li>
+    <li><b>Sending posture during deliverability recovery:</b> these flows target recent, engaged people — safe to send and reputation-positive. Broad sends stay off until the domain recovers.</li>
+  </ul>
+
+  <div class="foot">
+    Email Donut · Flow Content Plan for MXT · July 2026 · Sources: full-account profile pull (1,962 profiles), message-by-message flow content pull (July 15), founder call July 10. Merge-tag names shown are the live property keys in the account.
+  </div>
+</div>
+</body>
+</html>
