@@ -112,6 +112,54 @@
   </table>
   <p class="sub">Syntax note (the root cause of the placeholder bugs): the property names literally contain curly braces, so templates must reference them as <span class="tag">{{ person|lookup:'{concern_name}-1'|default:'' }}</span> — typed bare, they send as literal text. Every template in this plan uses lookup syntax with a fallback.</p>
 
+  
+  <h3>By flow — properties used today vs. proposed</h3>
+  <table>
+    <tr><th style="width:150px">Flow</th><th>Custom properties used today</th><th>Proposed in the revamp</th></tr>
+    <tr>
+      <td><b>Quiz Complete</b><br><span class="num" style="color:var(--mut)">live · rebuild = Flow A</span></td>
+      <td><b>E1</b> (+2 identical A/B vars): first_name · product names/images/collateral ×3 · <span class="tag">{routine_formula_rationale}</span><br>
+          <b>E2:</b> ingredient <i>names</i> (descriptions mis-indexed) · concern-1 · product names<br>
+          <b>E3:</b> none — image-only<br>
+          <b>E4/E5:</b> concern-1/-2 · product names<br>
+          <b>E6:</b> first_name · concern-1/-2 · product names/images</td>
+      <td>Everything at left, <b>plus</b>: <span class="tag">{skin_profile}</span> <span class="tag">{concern_description}-1/-2</span> ingredient <b>%</b> + matched descriptions <span class="tag">{product_directions}</span> environment set (10) sensitivity set (4) <span class="tag">{routine_description_short}</span> <span class="tag">{free_reward}</span> + upsell copy · <span class="tag">{concern_short_name}-1</span> as logic</td>
+    </tr>
+    <tr>
+      <td><b>Trial Non-Conversion</b><br><span class="num" style="color:var(--mut)">live · same audience as Quiz Complete</span></td>
+      <td><b>E1:</b> first_name · <span class="tag">{skin_profile}</span> (jammed mid-sentence) · _primary_concern · ingredient names ×6 · product names<br><b>E2–E6:</b> first_name · _primary_concern · a few ingredient names · concern-1 · product names</td>
+      <td><b>Retire / merge into Flow A</b> — its testimonials and barrier-education copy are harvested; one flow owns the audience.</td>
+    </tr>
+    <tr>
+      <td><b>Mini Quiz Results</b><br><span class="num" style="color:var(--mut)">live</span></td>
+      <td><b>E1:</b> first_name only — sends literal "ROUTINE/PRODUCT" and "SKINCONCERN"<br><b>E2:</b> first_name · <span class="tag">{routine_name_1}</span><br><b>E3:</b> greets with a quiz <i>answer</i> as the name</td>
+      <td>Fix E1 with the real event tags (recommended product + concern), fix the E3 greeting, align the offer to the free trial.</td>
+    </tr>
+    <tr>
+      <td><b>Quiz Started</b><br><span class="num" style="color:var(--mut)">NEW — Flow B</span></td>
+      <td>No flow exists today</td>
+      <td><span class="tag">_primary_concern</span> as the branch key + quote-back — deliberately minimal; this flow <i>creates</i> the data the others spend.</td>
+    </tr>
+    <tr>
+      <td><b>Abandoned Checkout</b><br><span class="num" style="color:var(--mut)">NEW — Flow C</span></td>
+      <td>No flow exists today</td>
+      <td><span class="tag">{routine_name_1}</span> product name/image ×3 · <span class="tag">{concern_name}-1</span> <span class="tag">{skin_sensitivity_description}</span> <span class="tag">{product_directions}-3</span> <span class="tag">{concern_description}-1</span> <span class="tag">{free_reward}</span> + <span class="tag">{upsell_description_collateral}-1</span> — capped at 3–5 per email</td>
+    </tr>
+    <tr>
+      <td><b>Abandoned Browse</b><br><span class="num" style="color:var(--mut)">NEW</span></td>
+      <td>No flow exists today</td>
+      <td>A lighter subset of Flow A: profile read-back, routine card, top ingredient hook.</td>
+    </tr>
+  </table>
+
+  <h3>The broken placeholders — the search list</h3>
+  <p style="font-size:14px">19 distinct fake tags, <b>79 instances</b>, rendering as visible text in live sends. By frequency:</p>
+  <p style="font-size:13.5px;line-height:2"><span class="tag">{Primary Concern}</span>×17 <span class="tag">{Product 2 Key Ingredient}</span>×13 <span class="tag">{Product 3 Key Ingredient}</span>×12 <span class="tag">{Product 3 Name}</span>×5 <span class="tag">{Secondary Concern}</span>×4 <span class="tag">{Free Product Name}</span>×4 <span class="tag">{Skin Type}</span>×4 <span class="tag">{Esthetician Name}</span>×3 <span class="tag">{Product 2 Name}</span>×3 <span class="tag">{First Name}</span>×3 <span class="tag">{Product description}</span>×2 <span class="tag">{Product 1 Key Ingredient}</span>×2 · once each: <span class="tag">{Cost Per Day Subscription}</span> <span class="tag">{Cost Per Day One-Time}</span> <span class="tag">{Product 1 Name}</span> <span class="tag">{Product 2 Ingredient}</span> <span class="tag">{Product 3 Ingredient}</span> <span class="tag">{Routine Name}</span> <span class="tag">{Renewal Date}</span> — plus literal <span class="tag">ROUTINE/PRODUCT</span> and <span class="tag">SKINCONCERN</span> in Mini Quiz E1.</p>
+  <ul>
+    <li><b>To show these on the flow map (Figma):</b> the SMS bubbles are text layers — <b>Cmd+F</b> and search <span class="tag">{Primary Concern}</span>, <span class="tag">{Product 1 Key Ingredient}</span> or <span class="tag">{Free Product Name}</span>. Email-body instances sit inside the rendered images — spot them visually in <b>Quiz Complete → Email 6</b> and <b>Mini Quiz → Email 1</b>.</li>
+    <li><b>Three of these are phantoms:</b> "{Esthetician Name}", "{Cost Per Day…}" and "{Renewal Date}" reference properties that don't exist in the account at all — they could never have rendered.</li>
+  </ul>
+
   <hr class="rule">
 
   <!-- ============ 3. AUDIENCE DATA ============ -->
