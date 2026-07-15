@@ -69,6 +69,14 @@
   .bp-wrap .bp{max-width:none}
   ul{margin:0 0 14px 20px}
   li{margin-bottom:7px}
+  .charts{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0}
+  .chart{flex:1 1 380px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .chart h4{font-family:Georgia,serif;font-size:16px;margin:0}
+  .chart h4 span{display:block;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11.5px;color:var(--soft);font-weight:400;margin:2px 0 10px}
+  .chart svg{width:100%;height:auto;display:block}
+  .chart svg text{font-size:11.5px;fill:var(--ink);font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+  .chart svg .val{font-family:var(--mono);font-size:10.5px;fill:var(--soft)}
+  .chart .cap{font-size:12.5px;color:var(--soft);margin:10px 0 0}
   .foot{color:var(--soft);font-size:13px;border-top:1px solid var(--line);padding-top:18px;margin-top:56px}
   @media print{
     .page{padding:20px 8px}
@@ -119,10 +127,36 @@
   </table>
   <p class="sub">Syntax note (the root cause of the placeholder bugs): the property names literally contain curly braces, so templates must reference them as <span class="tag">{{ person|lookup:'{concern_name}-1'|default:'' }}</span> — typed bare, they send as literal text. Every template in this plan uses lookup syntax with a fallback.</p>
 
+  <hr class="rule">
+
+  <!-- ============ 3. AUDIENCE DATA ============ -->
+  <span class="section-no">03</span>
+  <h2>What the quiz data says — full pull of all 1,962 profiles</h2>
+  <p class="sub">Live aggregation of every profile in the account (July 15). This is the evidence behind the copy decisions in the flow maps.</p>
+
+  <div class="charts">
+    <div class="chart"><h4>Age distribution <span>n = 977 profiles with an age captured</span></h4><svg viewBox="0 0 420 170" role="img" aria-label="Age distribution"><text x="0" y="15">18–24</text><g><title>18–24: 34 · 3.5%</title><rect x="150" y="4" width="24" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="182" y="15">34 · 3.5%</text><text x="0" y="42">25–34</text><g><title>25–34: 139 · 14.2%</title><rect x="150" y="31" width="100" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="258" y="42">139 · 14.2%</text><text x="0" y="69">35–44</text><g><title>35–44: 201 · 20.6%</title><rect x="150" y="58" width="145" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="303" y="69">201 · 20.6%</text><text x="0" y="96">45–54</text><g><title>45–54: 155 · 15.9%</title><rect x="150" y="85" width="112" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="270" y="96">155 · 15.9%</text><text x="0" y="123">55–64</text><g><title>55–64: 236 · 24.2%</title><rect x="150" y="112" width="170" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="328" y="123">236 · 24.2%</text><text x="0" y="150">65+</text><g><title>65+: 212 · 21.7%</title><rect x="150" y="139" width="153" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="311" y="150">212 · 21.7%</text></svg><p class="cap"><b>62% are 45+ · 46% are 55+</b> — the voice defaults to mature skin; the younger acne/oil minority gets its own branch.</p></div>
+    <div class="chart"><h4>Primary + secondary concerns <span>occurrences across 1,146 profiles with recommendations</span></h4><svg viewBox="0 0 420 359" role="img" aria-label="Primary + secondary concerns"><text x="0" y="15">Wrinkles/Fine Lines</text><g><title>Wrinkles/Fine Lines: 621</title><rect x="150" y="4" width="170" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="328" y="15">621</text><text x="0" y="42">Firmness</text><g><title>Firmness: 304</title><rect x="150" y="31" width="83" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="241" y="42">304</text><text x="0" y="69">Eye-Area Aging</text><g><title>Eye-Area Aging: 167</title><rect x="150" y="58" width="46" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="204" y="69">167</text><text x="0" y="96">Uneven Tone/Dark Spots</text><g><title>Uneven Tone/Dark Spots: 166</title><rect x="150" y="85" width="45" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="203" y="96">166</text><text x="0" y="123">Large Pores</text><g><title>Large Pores: 163</title><rect x="150" y="112" width="45" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="203" y="123">163</text><text x="0" y="150">Acne/Breakouts</text><g><title>Acne/Breakouts: 156</title><rect x="150" y="139" width="43" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="201" y="150">156</text><text x="0" y="177">Dryness</text><g><title>Dryness: 142</title><rect x="150" y="166" width="39" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="197" y="177">142</text><text x="0" y="204">Redness</text><g><title>Redness: 139</title><rect x="150" y="193" width="38" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="196" y="204">139</text><text x="0" y="231">Dullness</text><g><title>Dullness: 104</title><rect x="150" y="220" width="28" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="186" y="231">104</text><text x="0" y="258">Rough Texture</text><g><title>Rough Texture: 102</title><rect x="150" y="247" width="28" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="186" y="258">102</text><text x="0" y="285">Oiliness</text><g><title>Oiliness: 79</title><rect x="150" y="274" width="22" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="180" y="285">79</text><text x="0" y="312">Detox</text><g><title>Detox: 43</title><rect x="150" y="301" width="12" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="170" y="312">43</text><text x="0" y="339">Scarring</text><g><title>Scarring: 39</title><rect x="150" y="328" width="11" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="169" y="339">39</text></svg><p class="cap">The aging cluster (wrinkles + firmness + eye-area) = 1,092 mentions — the dominant story by far.</p></div>
+  </div>
+  <div class="charts">
+    <div class="chart"><h4>Most-recommended products <span>occurrences across all routine positions</span></h4><svg viewBox="0 0 420 224" role="img" aria-label="Most-recommended products"><text x="0" y="15">Gentle Skin Cleanser · Trial</text><g><title>Gentle Skin Cleanser · Trial: 455</title><rect x="190" y="4" width="150" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="348" y="15">455</text><text x="0" y="42">Tri-Retin Cream (S/D) · Trial</text><g><title>Tri-Retin Cream (S/D) · Trial: 432</title><rect x="190" y="31" width="142" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="340" y="42">432</text><text x="0" y="69">Tri-Retin Serum · Trial</text><g><title>Tri-Retin Serum · Trial: 405</title><rect x="190" y="58" width="134" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="332" y="69">405</text><text x="0" y="96">Gentle Skin Cleanser</text><g><title>Gentle Skin Cleanser: 248</title><rect x="190" y="85" width="82" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="280" y="96">248</text><text x="0" y="123">Tri-Retin Cream (S/D)</text><g><title>Tri-Retin Cream (S/D): 243</title><rect x="190" y="112" width="80" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="278" y="123">243</text><text x="0" y="150">Tri-Retin Serum</text><g><title>Tri-Retin Serum: 160</title><rect x="190" y="139" width="53" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="251" y="150">160</text><text x="0" y="177">GA/Charcoal Cleanser</text><g><title>GA/Charcoal Cleanser: 150</title><rect x="190" y="166" width="49" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="247" y="177">150</text><text x="0" y="204">GA/Charcoal · Trial</text><g><title>GA/Charcoal · Trial: 129</title><rect x="190" y="193" width="43" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="241" y="204">129</text></svg><p class="cap">Trial sizes own the top three slots — the engine is built to sample, which is why every CTA pushes the free trial.</p></div>
+    <div class="chart"><h4>Top upsells <span>occurrences across upsell positions</span></h4><svg viewBox="0 0 420 170" role="img" aria-label="Top upsells"><text x="0" y="15">Mineral Sunscreen SPF 33</text><g><title>Mineral Sunscreen SPF 33: 279</title><rect x="190" y="4" width="150" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="348" y="15">279</text><text x="0" y="42">Night Repair Balm</text><g><title>Night Repair Balm: 249</title><rect x="190" y="31" width="134" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="332" y="42">249</text><text x="0" y="69">Vitamin C Brightening Cream</text><g><title>Vitamin C Brightening Cream: 101</title><rect x="190" y="58" width="54" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="252" y="69">101</text><text x="0" y="96">Advanced Moisture Complex</text><g><title>Advanced Moisture Complex: 83</title><rect x="190" y="85" width="45" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="243" y="96">83</text><text x="0" y="123">Tri-Retin Cream (S/D)</text><g><title>Tri-Retin Cream (S/D): 57</title><rect x="190" y="112" width="31" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="229" y="123">57</text><text x="0" y="150">Deep-Hydration Cream</text><g><title>Deep-Hydration Cream: 50</title><rect x="190" y="139" width="27" height="14" rx="3" fill="#0e6b5c"/></g><text class="val" x="225" y="150">50</text></svg><p class="cap">SPF is the #1 upsell — and retinoids cause photosensitivity, so the UV data (A-E3) sells it as dermatology, not a pitch.</p></div>
+  </div>
+
+  <h3 style="margin-top:22px">The facts, in brief</h3>
+  <ul>
+    <li><b>Coverage:</b> 1,962 profiles · <b>1,146 (58%)</b> carry a full routine recommendation · 977 (50%) carry an age — the personalization fuel already exists for the majority of the list.</li>
+    <li><b>Mature audience:</b> 62% are 45+, 46% are 55+. Default voice = mature-skin, results-and-science; the acne/oily/pores minority (~15%) branches off <span class="tag">{concern_name}-1</span> so nobody gets the wrong story.</li>
+    <li><b>The retinoid engine:</b> Retinoate + Bakuchiol appear together on <b>1,306</b> recommendation slots — the Tri-Retin line is the workhorse. Retinoid education (the sensitivity ramp, the SPF pairing, the weeks 8–12 timeline) is core copy, not a nice-to-have.</li>
+    <li><b>Ingredient depth:</b> the engine assigns up to 9 ingredient name/%/description trios per person (Aloe Vera 831 · Beta Glucan 802 · Retinol S/D 730 · Ceramides 723 · Resveratrol 722 · Niacinamide 627) — the raw material for the "why these three" email.</li>
+    <li><b>Environment layer:</b> every completed quiz generates zip-derived UV index, air quality, water hardness and seasonality plus pre-written narrative paragraphs — 10 properties, zero current usage, all deployed in A-E3.</li>
+    <li><b>Quiz abandoners are not blank:</b> profiles sync progressively — some carry a primary concern before finishing, some only an email. That split is exactly Flow B's branch.</li>
+  </ul>
+
   <hr class="rule flow-break">
 
-  <!-- ============ 3. FLOW MAPS ============ -->
-  <span class="section-no">03</span>
+  <!-- ============ 4. FLOW MAPS ============ -->
+  <span class="section-no">04</span>
   <h2>Flow maps — every email, its properties, its quote-line</h2>
   <p class="sub">Method in one line: each flow meets the person at the last thing they did and asks for exactly one next step (finish the quiz → try it free → finish checkout). The subscription is never argued — it's won later by the product. Every email opens with a one-line quoted phrase; every property is listed per message.</p>
 
@@ -179,7 +213,7 @@
   <hr class="rule flow-break">
 
   <!-- ============ 4. BLUEPRINTS ============ -->
-  <span class="section-no">04</span>
+  <span class="section-no">05</span>
   <h2>Email blueprints — rendered with a real profile</h2>
   <p class="sub">One sample per flow, laid out as the email will actually read. Values are a real quiz completer's (Kaydence — Williamsburg, KY · combination skin · acne + wrinkles · Clarifying Routine). The small green labels show which property fills each block.</p>
 
@@ -276,7 +310,7 @@
   <hr class="rule">
 
   <!-- ============ 5. ARCHITECTURE ============ -->
-  <span class="section-no">05</span>
+  <span class="section-no">06</span>
   <h2>Flow architecture — how the three coexist</h2>
   <table>
     <tr><th>Flow</th><th>Trigger</th><th>Suppression / exit (all conditions AND'd)</th></tr>
@@ -294,7 +328,7 @@
   <hr class="rule flow-break">
 
   <!-- ============ 6. VOICE LAYER (moved to end) ============ -->
-  <span class="section-no">06</span>
+  <span class="section-no">07</span>
   <h2>Appendix — the voice layer: enemy, proof language, signature elements</h2>
   <p class="sub">The copy system behind every message above.</p>
 
