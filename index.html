@@ -140,6 +140,27 @@
     <li><b>The environment goldmine is untouched.</b> UV index, seasonality, air quality, water hardness — generated for every completed quiz, used in zero emails.</li>
   </ul>
 
+  <h3 style="margin-top:26px">The property-coverage case — today vs. this plan</h3>
+  <p>A template-by-template census of all 46 live emails + 40 SMS, against the property set this plan deploys:</p>
+  <div class="stat-row">
+    <div class="stat"><b>26 → ~50</b><span>distinct custom properties referenced (live flows today → this plan)</span></div>
+    <div class="stat"><b>7 → 22+</b><span>finished copy blocks used — of ~40 the quiz engine pre-writes per person</span></div>
+    <div class="stat"><b>79</b><span>broken literal placeholders (e.g. "{Primary Concern}") currently rendering as visible text</span></div>
+    <div class="stat"><b>0</b><span>environment, sensitivity, concern-science, directions or free-reward blocks used today — all activated in this plan</span></div>
+  </div>
+  <table>
+    <tr><th>Property family</th><th>Live flows today</th><th>This plan</th></tr>
+    <tr><td>Names &amp; labels (concerns, products, routine)</td><td>✅ used (the bulk of current usage)</td><td>kept, correctly wired</td></tr>
+    <tr><td>Ingredient science — names / <b>%</b> / descriptions</td><td>partial; descriptions <b>mis-indexed</b> (Product 2 shows Product 1's science); percentages never used</td><td>all 9 trios, index-matched</td></tr>
+    <tr><td>Concern science ({concern_description}-1/-2)</td><td>❌ never</td><td>A-E2, C-E2</td></tr>
+    <tr><td>Skin profile paragraph</td><td>jammed mid-sentence (breaks grammar)</td><td>hero quote-line, A-E1</td></tr>
+    <tr><td>Environment set (city, UV, air, water, stressors)</td><td>❌ never — 10 properties, zero usage</td><td>A-E3 + SMS</td></tr>
+    <tr><td>Sensitivity + hydration set</td><td>❌ never</td><td>A-E4, C-E2</td></tr>
+    <tr><td>Usage directions + ramp ({product_directions})</td><td>❌ never</td><td>A-E4, C-E2</td></tr>
+    <tr><td>Routine descriptions (short/long)</td><td>❌ never</td><td>A-E5, C-E3</td></tr>
+    <tr><td>Free reward + upsell copy blocks</td><td>❌ broken literal "{Free Product Name}"</td><td>A-E6, C-E3 urgency close</td></tr>
+  </table>
+
   <hr class="rule">
 
   <!-- ============ 3. METHOD ============ -->
