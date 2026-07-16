@@ -6,53 +6,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MXT — Proposal · Email &amp; SMS Revamp · Email Donut</title>
 <style>
-  :root{ --ink:#15171c; --mut:#737880; --faint:#a0a5ac; --line:#e7e6e2; --bg:#eceae6; --card:#fff;
-    --sal:#fb5c6d; --saltint:#ffe9ec; --saldeep:#c0263b; --pos:#1f9d63; --postint:#e4f4ec;
-    --blue:#3a7bd5; --bluetint:#eaf1fc; --bluedeep:#1f4f9c;
+  :root{ --ink:#15171c; --mut:#737880; --faint:#a0a5ac; --line:#e7e6e2; --grid:#efeee9; --bg:#eceae6; --card:#fff;
+    --sal:#fb5c6d; --saltint:#ffe9ec; --saldeep:#c0263b; --pos:#1f9d63; --postint:#e4f4ec; --amber:#bb8a1e;
     --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font:16px/1.6 "Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:48px 16px}
-  .page{max-width:760px;margin:0 auto;background:var(--card);border-radius:8px;padding:60px 62px 70px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
-  h1{font-size:30px;line-height:1.2;letter-spacing:-.01em;font-weight:800;margin:14px 0 0}
-  h3{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);font-weight:800;margin:36px 0 0}
-  .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:800}
+  body{background:var(--bg);color:var(--ink);font:16px/1.65 "Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:48px 16px}
+  .paper{max-width:760px;margin:0 auto;background:var(--card);border-radius:8px;padding:68px 70px 76px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .brand{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:800}
+  h1{font-size:29px;line-height:1.2;letter-spacing:-.01em;font-weight:800;margin:14px 0 0}
   .meta{font-size:13px;color:var(--mut);margin-top:10px}
+  h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800;margin:38px 0 0}
   table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0 0}
   th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:800;text-align:left;padding:8px 9px;border-bottom:2px solid var(--ink)}
   td{text-align:left;padding:9px 9px;border-bottom:1px solid var(--line);vertical-align:baseline}
-  td b{font-weight:700}
+  tr:hover td{background:#faf9f6}
   .num{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
   th.num{text-align:right}
   .sm{color:var(--mut);font-size:12px}
   .tot td{border-top:2px solid var(--ink);border-bottom:none;font-weight:800;font-size:15px;padding-top:11px}
-  .tot td .big{font-size:21px}
-  .sub td{border-bottom:none;padding-top:11px;color:var(--mut)}
+  .tot td .big{font-size:22px}
   .disc td{border-bottom:none;color:var(--pos);font-weight:700}
   .strike{color:var(--faint);text-decoration:line-through}
-  .rate-was{color:var(--faint);text-decoration:line-through;font-size:12px;margin-right:5px}
-  .box{margin:26px 0 0;border:2px solid var(--blue);background:var(--bluetint);border-radius:9px;padding:20px 22px 22px}
-  .box .bt{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bluedeep);font-weight:800}
+  .permo{font-size:12.5px;color:var(--mut);margin:9px 2px 0;text-align:right}
+  .box{margin:30px 0 0;border:2px solid var(--sal);background:var(--saltint);border-radius:9px;padding:20px 22px 22px}
+  .box .bt{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--saldeep);font-weight:800}
   .box h4{font-size:17px;font-weight:800;margin:6px 0 0;color:var(--ink)}
   .box table{margin:14px 0 0}
-  .box th{color:var(--bluedeep);border-bottom:2px solid var(--blue)}
-  .box td{border-bottom:1px solid #cfdff7}
-  .box .tot td{border-top:2px solid var(--blue);color:var(--bluedeep)}
-  .hero-n{font-size:34px;font-weight:800;color:var(--bluedeep);font-variant-numeric:tabular-nums;line-height:1}
-  .incl{display:inline-block;background:var(--bluedeep);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:4px 10px}
-  .foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;line-height:1.6;color:var(--mut)}
-  @media print{ body{padding:0;background:#fff} .page{box-shadow:none;padding:20px 8px} }
+  .box th{color:var(--saldeep);border-bottom:2px solid var(--sal)}
+  .box td{border-bottom:1px solid #f6d3d9}
+  .box tr:hover td{background:transparent}
+  .box .tot td{border-top:2px solid var(--sal);color:var(--saldeep)}
+  .hero-n{font-size:34px;font-weight:800;color:var(--saldeep);font-variant-numeric:tabular-nums;line-height:1}
+  .incl{display:inline-block;background:var(--saldeep);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:4px 10px}
+  .foot{margin-top:46px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;line-height:1.6;color:var(--mut)}
+  @media print{ body{padding:0;background:#fff} .paper{box-shadow:none;padding:20px 8px} }
 </style>
 </head>
 <body>
-<div class="page">
+<div class="paper">
 
-  <div class="kicker">MXT × Email Donut</div>
+  <div class="brand">MXT × Email Donut</div>
   <h1>Email &amp; SMS Revamp</h1>
   <p class="meta">Proposal for Jack Davies · Two-month project · July 2026</p>
 
   <h3>Flows</h3>
   <table>
-    <thead><tr><th>Flow</th><th>Status</th><th class="num">Plain text emails</th><th class="num">SMS</th></tr></thead>
+    <thead><tr><th>Flow</th><th></th><th class="num">Plain text emails</th><th class="num">SMS</th></tr></thead>
     <tbody>
       <tr><td><b>Quiz Complete</b></td><td class="sm">Rebuild</td><td class="num">4</td><td class="num">3</td></tr>
       <tr><td><b>Quiz Started, Not Completed</b></td><td class="sm">New</td><td class="num">8</td><td class="num">3</td></tr>
@@ -71,17 +70,6 @@
     </tbody>
   </table>
 
-  <h3>Also included</h3>
-  <table>
-    <tbody>
-      <tr><td>SMS channel diagnosis and activation</td></tr>
-      <tr><td>79 broken placeholders repaired across 19 tags</td></tr>
-      <tr><td>Offer alignment to the live free trial, every message</td></tr>
-      <tr><td>Flow architecture: triggers, suppression, exits</td></tr>
-      <tr><td>Trial Non-Conversion flow retired and merged into Quiz Complete</td></tr>
-    </tbody>
-  </table>
-
   <div class="box">
     <span class="bt">Included in the package price</span>
     <h4>Design upgrade, once deliverability has recovered</h4>
@@ -93,45 +81,32 @@
           <td class="num"><span class="hero-n">20</span></td>
           <td class="num"><span class="incl">Included</span></td>
         </tr>
-        <tr class="tot"><td>Triggered by the open-rate recovery, not a date</td><td class="num">20</td><td class="num">$0</td></tr>
+        <tr class="tot"><td>Triggered by the open rate recovery, not a date</td><td class="num">20</td><td class="num">$0</td></tr>
       </tbody>
     </table>
   </div>
 
   <h3>Investment</h3>
   <table>
-    <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead>
     <tbody>
-      <tr><td><b>Flow emails</b><br><span class="sm">Plain text build and designed rebuild</span></td><td class="num">20</td><td class="num"><span class="rate-was">$300</span>$225</td><td class="num">$4,500</td></tr>
-      <tr><td><b>Campaign emails</b></td><td class="num">16</td><td class="num">$150</td><td class="num">$2,400</td></tr>
-      <tr><td><b>SMS</b><br><span class="sm">12 in flows, 12 as campaigns</span></td><td class="num">24</td><td class="num">$50</td><td class="num">$1,200</td></tr>
-      <tr class="sub"><td colspan="3">Standard total, 60 messages</td><td class="num strike" style="font-size:15px">$9,600</td></tr>
-      <tr class="disc"><td colspan="3">Project discount</td><td class="num">−$1,500 &nbsp;(15.6%)</td></tr>
-      <tr class="tot"><td colspan="3">Total, two-month project</td><td class="num"><span class="big">$8,100</span></td></tr>
+      <tr><td>Standard total<span class="sm"> &nbsp;·&nbsp; 60 messages</span></td><td class="num strike" style="font-size:15px">$9,600</td></tr>
+      <tr class="disc"><td>Project discount &nbsp;<span style="font-weight:400">(15.6%)</span></td><td class="num">−$1,500</td></tr>
+      <tr class="tot"><td>Total, two-month project</td><td class="num"><span class="big">$8,100</span></td></tr>
     </tbody>
   </table>
+  <p class="permo">Billed $4,050 per month over two months.</p>
 
   <h3>Timeline</h3>
   <table>
     <thead><tr><th>When</th><th>What lands</th></tr></thead>
     <tbody>
-      <tr><td><b>Week 1</b></td><td>SMS live. First plain text campaigns out. Content live in under 7 days.</td></tr>
-      <tr><td><b>Weeks 1 to 4</b></td><td>Quiz Complete and Abandoned Checkout live. Campaigns twice weekly.</td></tr>
-      <tr><td><b>Weeks 4 to 6</b></td><td>Quiz Started and Abandoned Browse live.</td></tr>
-      <tr><td><b>Weeks 6 to 8</b></td><td>Design upgrade on the recovery signal.</td></tr>
+      <tr><td><b>Week 1</b></td><td>First deliverables live: email campaigns and SMS campaigns.</td></tr>
+      <tr><td><b>Weeks 2 to 3</b></td><td>All flows live.</td></tr>
+      <tr><td><b>Week 6</b></td><td>Switch to designed flows.</td></tr>
     </tbody>
   </table>
 
-  <h3>To start</h3>
-  <table>
-    <tbody>
-      <tr><td>Approve the scope. Content is live in under 7 days.</td></tr>
-      <tr><td>Confirm the free reward window is enforced, so the deadline in the copy is real.</td></tr>
-      <tr><td>Dev fix: <code>{step_name}</code> renders as "Step 2 / Step 3". Sensitivity values arrive lowercase with trailing periods.</td></tr>
-    </tbody>
-  </table>
-
-  <div class="foot">Email Donut · Proposal for MXT · July 2026 · Scope per the Email &amp; SMS Revamp flow plan. Pricing valid 30 days. Billed $4,050 per month.</div>
+  <div class="foot">Email Donut · Proposal for MXT · July 2026 · Scope per the Email &amp; SMS Revamp flow plan. Pricing valid 30 days.</div>
 
 </div>
 </body>
