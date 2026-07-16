@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MXT — Proposal · Email &amp; SMS Revamp · Email Donut</title>
+<style>
+  :root{ --ink:#15171c; --mut:#737880; --faint:#a0a5ac; --line:#e7e6e2; --grid:#efeee9; --bg:#eceae6; --card:#fff;
+    --sal:#fb5c6d; --saltint:#ffe9ec; --saldeep:#c0263b; --pos:#1f9d63; --postint:#e4f4ec; --amber:#bb8a1e; --blue:#3a7bd5;
+    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:16px/1.65 "Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:48px 16px}
+  .page{max-width:860px;margin:0 auto;background:var(--card);border-radius:8px;padding:68px 70px 84px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  h1{font-size:30px;line-height:1.2;letter-spacing:-.01em;font-weight:800;margin:14px 0 0}
+  h2{font-size:21px;line-height:1.3;font-weight:800;margin:10px 0 6px;letter-spacing:-.01em}
+  h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:800;margin:30px 0 6px}
+  p{margin:13px 0 0}
+  .kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:800}
+  .meta{font-size:13px;color:var(--mut);margin-top:10px}
+  .section-no{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sal);font-weight:800;padding-bottom:8px;border-bottom:2px solid var(--ink);margin:44px 0 18px}
+  .sub{color:var(--mut);font-size:13.5px;margin:4px 0 16px}
+  .pull{margin:18px 0;padding:13px 17px;background:#faf9f6;border-left:3px solid var(--sal);border-radius:0 6px 6px 0;font-size:15.5px;line-height:1.5;font-weight:600}
+  .pull small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;font-weight:400}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:18px 0 20px}
+  th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);font-weight:800;text-align:left;padding:8px 9px;border-bottom:2px solid var(--ink)}
+  td{text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:baseline}
+  tr:hover td{background:#faf9f6}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+  th.num{text-align:right}
+  .tot td{border-top:2px solid var(--ink);border-bottom:none;font-weight:800;font-size:15px;padding-top:12px}
+  .tot td .big{font-size:19px}
+  .disc td{color:var(--pos);font-weight:700}
+  .strike{color:var(--faint);text-decoration:line-through}
+  .callout{margin:18px 0;padding:13px 17px;background:#fbf0d8;border-left:3px solid var(--amber);border-radius:0 6px 6px 0;font-size:14px;line-height:1.55}
+  .callout b{color:#8a6610}
+  .phase{display:flex;gap:16px;flex-wrap:wrap;margin:18px 0}
+  .pcard{flex:1 1 320px;border:1px solid var(--line);border-radius:8px;padding:18px 20px 20px;background:#faf9f6}
+  .pcard .pn{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--saldeep);font-weight:800}
+  .pcard b.pt{display:block;font-size:16px;margin:5px 0 8px}
+  .pcard p{font-size:13.5px;line-height:1.55;color:var(--mut);margin:8px 0 0}
+  .prio{counter-reset:p;list-style:none;margin:18px 0 0}
+  .prio li{counter-increment:p;position:relative;padding:0 0 16px 46px;margin:0 0 4px}
+  .prio li::before{content:counter(p);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .prio li>b{display:block;margin-bottom:2px;font-size:16px}
+  .prio span{font-size:14px;color:var(--mut);line-height:1.55;display:block}
+  ul{margin:12px 0 0;padding-left:0;list-style:none}
+  li{margin:10px 0;padding-left:24px;position:relative}
+  li::before{content:"";position:absolute;left:3px;top:10px;width:7px;height:7px;border-radius:50%;background:var(--ink)}
+  .foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;line-height:1.6;color:var(--mut)}
+  @media print{ body{padding:0;background:#fff} .page{box-shadow:none;padding:20px 8px} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="kicker">MXT × Email Donut</div>
+  <h1>Email &amp; SMS Revamp</h1>
+  <p class="meta">Proposal for Jack Davies · Two-month project · July 2026</p>
+
+  <p>This is the build behind the flow plan we walked through. Two months, fixed scope, fixed price. It covers three things in order: recovering the sending reputation, turning SMS on, and rebuilding the flows so the quiz data you already collect actually reaches the person who generated it.</p>
+
+  <div class="pull">The engine writes roughly 40 finished copy blocks per person. The live flows use 7, several of them wired wrong, and 79 broken placeholders are rendering as visible text in real sends.
+    <small>Source: message-by-message census of all 46 live emails and 40 SMS, July 15.</small></div>
+
+  <span class="section-no">01</span>
+  <h2>What the two months buy</h2>
+  <ol class="prio">
+    <li><b>Deliverability recovery</b><span>Opens sit near 8%. Authentication is clean, so this is reputation, not setup, and it traces back to the bounce spike from quiz testing. The fix is plain-text campaigns to the most engaged segment, twice a week, until opens recover. Expected window: 2 to 4 weeks.</span></li>
+    <li><b>SMS turned on</b><span>Numbers are being collected and not a single SMS has ever sent. We diagnose the break (sending number and 10DLC registration, consent gating, or message status), fix the broken tags, and switch the channel on. This is the one channel that works while email reputation is still climbing back.</span></li>
+    <li><b>The missing flows built</b><span>Abandoned Checkout and Abandoned Browse. Your two highest-intent audiences currently receive nothing at all.</span></li>
+    <li><b>The existing flows rebuilt</b><span>Quiz Complete and Quiz Started, wired to the real copy blocks, the real properties, and the real offer. The live site sells the free 21-day trial at $6.95 shipping. Every email and SMS in the account still sells a $20 trial that no longer exists.</span></li>
+  </ol>
+
+  <span class="section-no">02</span>
+  <h2>Flows are built twice, and that is the point</h2>
+  <p class="sub">Written first, designed second. One price covers both builds.</p>
+
+  <p>Fixing campaign deliverability does not automatically carry over to flows, so we do not gamble the rebuild on it. Every flow goes live as plain text first, which is both the fastest thing to ship and the safest thing to send while reputation is still recovering. Once opens confirm the recovery, the same copy gets rebuilt as full branded design.</p>
+
+  <div class="phase">
+    <div class="pcard">
+      <span class="pn">Phase 1 · from day one</span>
+      <b class="pt">Written</b>
+      <p>Every flow message goes live as lightweight plain text. Copy, logic, branching, property wiring, and SMS are all final in this phase. This is the version that carries revenue while the domain climbs back.</p>
+      <p><b>Live in under 7 days from kickoff.</b></p>
+    </div>
+    <div class="pcard">
+      <span class="pn">Phase 2 · on the deliverability signal</span>
+      <b class="pt">Designed</b>
+      <p>Once open rates confirm recovery, each message is rebuilt as fully designed, on-brand HTML. The copy does not change. The design comes in on top of a version already proven to send and open.</p>
+      <p><b>Triggered by the data, not the calendar.</b></p>
+    </div>
+  </div>
+
+  <div class="callout"><b>What this means commercially:</b> every flow message in this proposal is built twice, once written and once designed. It is priced once. The per-message rate below covers both builds.</div>
+
+  <span class="section-no">03</span>
+  <h2>Deliverables</h2>
+  <p class="sub">Fixed scope for the two-month project.</p>
+
+  <h3>Flows · 20 emails, 12 SMS</h3>
+  <table>
+    <thead><tr><th>Flow</th><th>Status</th><th class="num">Emails</th><th class="num">SMS</th></tr></thead>
+    <tbody>
+      <tr><td><b>Quiz Complete</b><br><span style="color:var(--mut);font-size:12.5px">The flagship. Every paid lead lands here. Absorbs the parallel Trial Non-Conversion flow so one flow owns the audience.</span></td><td>Rebuild</td><td class="num">6</td><td class="num">3</td></tr>
+      <tr><td><b>Quiz Started, Not Completed</b><br><span style="color:var(--mut);font-size:12.5px">Built new, branched on whether a primary concern was captured before drop-off. Creates the data the other flows spend.</span></td><td>New · branched</td><td class="num">4</td><td class="num">1</td></tr>
+      <tr><td><b>Abandoned Checkout</b><br><span style="color:var(--mut);font-size:12.5px">Highest intent audience in the account. Currently receives nothing.</span></td><td>New</td><td class="num">3</td><td class="num">3</td></tr>
+      <tr><td><b>Abandoned Browse</b><br><span style="color:var(--mut);font-size:12.5px">Also catches the drop-off between finishing the quiz and reaching the results page.</span></td><td>New</td><td class="num">4</td><td class="num">3</td></tr>
+      <tr><td><b>Mini Quiz Results</b><br><span style="color:var(--mut);font-size:12.5px">Live and misfiring. Sends literal "ROUTINE/PRODUCT" and "SKINCONCERN", and greets people with a quiz answer as their name.</span></td><td>Fix</td><td class="num">3</td><td class="num">2</td></tr>
+      <tr class="tot"><td>Total</td><td></td><td class="num">20</td><td class="num">12</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Campaigns · 16 emails, 12 SMS</h3>
+  <table>
+    <thead><tr><th>Campaign</th><th>Cadence</th><th class="num">Over 2 months</th></tr></thead>
+    <tbody>
+      <tr><td><b>Plain-text email campaigns</b><br><span style="color:var(--mut);font-size:12.5px">To the most engaged segment. This is the mechanism that rebuilds the sending reputation, not a content exercise.</span></td><td>2 per week</td><td class="num">16</td></tr>
+      <tr><td><b>SMS campaigns</b><br><span style="color:var(--mut);font-size:12.5px">Carries revenue while email reputation recovers. Unaffected by the domain issue.</span></td><td>6 per month</td><td class="num">12</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Included, not billed per message</h3>
+  <ul>
+    <li>SMS channel diagnosis and activation, including the sending number and registration check.</li>
+    <li>Repair of 79 broken placeholder instances across 19 fake tags currently rendering as visible text.</li>
+    <li>Offer alignment across every message, moving the whole account onto the live free trial.</li>
+    <li>Flow architecture: trigger, suppression, and exit logic so one flow owns each person at a time, priority Checkout, then Quiz Complete, then Quiz Started.</li>
+    <li>Retiring and merging the duplicate Trial Non-Conversion flow into Quiz Complete.</li>
+  </ul>
+
+  <span class="section-no">04</span>
+  <h2>Investment</h2>
+
+  <table>
+    <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead>
+    <tbody>
+      <tr><td><b>Flow emails</b><br><span style="color:var(--mut);font-size:12.5px">Written build and designed rebuild, both included</span></td><td class="num">20</td><td class="num"><span class="strike">$300</span> &nbsp;$225</td><td class="num">$4,500</td></tr>
+      <tr><td><b>Campaign emails</b><br><span style="color:var(--mut);font-size:12.5px">Plain text, deliverability recovery</span></td><td class="num">16</td><td class="num">$150</td><td class="num">$2,400</td></tr>
+      <tr><td><b>SMS</b><br><span style="color:var(--mut);font-size:12.5px">12 in flows, 12 as campaigns</span></td><td class="num">24</td><td class="num">$50</td><td class="num">$1,200</td></tr>
+      <tr><td colspan="3" style="color:var(--mut)">Standard total, 60 messages</td><td class="num strike" style="font-size:15px">$9,600</td></tr>
+      <tr class="disc"><td colspan="3">Project discount, 15.6%</td><td class="num">−$1,500</td></tr>
+      <tr class="tot"><td colspan="3">Total, two-month project</td><td class="num"><span class="big">$8,100</span></td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13.5px;color:var(--mut)">60 messages across the two months, at a blended $135 each. Billed $4,050 per month. The discount reflects committing the full scope up front rather than pricing message by message.</p>
+
+  <div class="callout"><b>Why flows carry the discount:</b> at $225 the flow rate covers two builds of the same message, written and then designed. That is the largest single block of work in the project and where the rate is cut hardest, from $300 down to $225.</div>
+
+  <span class="section-no">05</span>
+  <h2>Timeline</h2>
+  <table>
+    <thead><tr><th>When</th><th>What lands</th></tr></thead>
+    <tbody>
+      <tr><td><b>Week 1</b></td><td>SMS diagnosed and switched on. First plain-text campaigns out the door. Content live in under 7 days.</td></tr>
+      <tr><td><b>Weeks 1 to 4</b></td><td>Campaigns running twice weekly. Quiz Complete and Abandoned Checkout built and live as written flows. SMS campaigns start.</td></tr>
+      <tr><td><b>Weeks 4 to 6</b></td><td>Quiz Started, Abandoned Browse, and the Mini Quiz fixes go live. Deliverability reviewed against the recovery target.</td></tr>
+      <tr><td><b>Weeks 6 to 8</b></td><td>On the deliverability signal, Phase 2 begins: flows rebuilt as designed HTML. Campaigns move off plain text and back into design.</td></tr>
+    </tbody>
+  </table>
+
+  <span class="section-no">06</span>
+  <h2>What happens after</h2>
+  <p>At the end of month two we will know two things we cannot know today: whether the reputation recovered, and how much campaign volume your list size actually supports. Both answers change what a sensible ongoing arrangement looks like, which is why this is scoped as a project and not a retainer.</p>
+  <p>If recovery lands where we expect, the natural next step is a monthly cadence built around campaign volume, and the work extends past Klaviyo into Recharge and how the subscription flow feeds back into the program.</p>
+
+  <h3>To start</h3>
+  <ul>
+    <li>Approve this scope and we begin immediately. Content is live in under 7 days.</li>
+    <li>Confirm whether the free-reward window is actually enforced. We will not put a deadline in copy that is not real.</li>
+    <li>Two data fixes on your side: <code>{step_name}</code> renders as "Step 2 / Step 3", and sensitivity values arrive lowercase with trailing periods. We can handle both template-side, but a source fix is cleaner.</li>
+  </ul>
+
+  <div class="foot">Email Donut · Proposal for MXT · July 2026 · Scope reconciled against the Email &amp; SMS Revamp flow plan (full-account pull of 1,962 profiles, census of 46 live emails and 40 SMS, July 15). Pricing valid 30 days.</div>
+
+</div>
+</body>
+</html>
